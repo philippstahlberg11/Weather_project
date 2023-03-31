@@ -25,16 +25,14 @@ public class Main {
     String strJson = JsonParser.getJSONFromURL(
         "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=60.391262&lon=5.322054");
 
+    String detailStr = "air_temperature";
+  
+          // limit på 86 i time par.
+    Object details = JsonParser.getTimeDetails(strJson, 0, detailStr);
+    WeatherView view = new WeatherView(details, detailStr);
 
-    Object details = JsonParser.getTimeDetails(strJson, 0, "air_temperature");
-    // VIEW- NODEL- CONTROLLER:
-    WeatherView view = new WeatherView(details);
-
-
-
-
-
-
+    
+    System.out.println(JsonParser.getMultipleTimeDetails(strJson, JsonParser.genericDetailsInfoList(), 0));
 
 
     JFrame frame = new JFrame();
@@ -43,5 +41,6 @@ public class Main {
     frame.setContentPane(view);
     frame.pack();
     frame.setVisible(true);
+
   }
 }

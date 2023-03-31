@@ -8,13 +8,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 public class WeatherView extends JPanel {
-    // we want to firstly show the text of tempereature simply to the screen:)
+
+
+    // we want the information from jsonparser to this class, since we would like to know the time, detailsstirng (without having a par.) and etc.
 
     public Object temperatureString;
+    public String detailsInfo;
 
-    public WeatherView(Object temperature){
+    // perhaps these parameters should be generalized, since one could have an array of them, or just one object?
+    public WeatherView(Object temperature, String detailsString){
         this.setPreferredSize(new Dimension(500, 500));
         this.temperatureString = temperature;
+        this.detailsInfo = detailsString;
 
     }
     @Override
@@ -27,7 +32,7 @@ public class WeatherView extends JPanel {
       Color color = Color.BLACK;
       g2.setColor(color);
       g2.draw(rect);
-      Inf101Graphics.drawCenteredString(g2, "Temperature " + this.temperatureString , rect);
+      Inf101Graphics.drawCenteredString(g2, this.detailsInfo + this.temperatureString , rect);
     
     }
 
