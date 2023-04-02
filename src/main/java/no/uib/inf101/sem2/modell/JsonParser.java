@@ -1,4 +1,4 @@
-package no.uib.inf101.sem2;
+package no.uib.inf101.sem2.modell;
 
 import java.awt.List;
 import java.io.BufferedReader;
@@ -171,6 +171,26 @@ public class JsonParser{
              */
         
 
+
+     }
+
+     public static ArrayList<Object> getNextHoursDetails(int timeLimit, String jsonString){
+
+        // ha en arraylist til hver time som er også få de mest generic-infoen om hver av timene:
+        ArrayList<Object> nextHourgenericInfo = new ArrayList<>();
+
+        for(int i = 0; i < timeLimit; i ++){
+                    JSONObject jsonObj = new JSONObject(jsonString);
+                    JSONObject jsonObect = jsonObj.getJSONObject("properties");
+                    JSONArray ja_data = jsonObect.getJSONArray("timeseries");
+                    JSONObject data_object = ja_data.getJSONObject(i);
+
+                    nextHourgenericInfo.add(data_object.getString("time"));
+                    nextHourgenericInfo.add( getMultipleTimeDetails(jsonString, genericDetailsInfoList(), i));
+
+        }
+
+        return nextHourgenericInfo;
 
      }
 

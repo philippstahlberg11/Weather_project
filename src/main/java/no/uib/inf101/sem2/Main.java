@@ -15,7 +15,8 @@ import org.json.JSONObject;
 //import org.json.JSONValue;
 //import org.json.parser.JSONParser;
 
-import no.uib.inf101.sem2.JsonParser;
+import no.uib.inf101.sem2.grid.Grid;
+import no.uib.inf101.sem2.modell.JsonParser;
 
 public class Main {
   public static void main(String[] args) {
@@ -25,15 +26,13 @@ public class Main {
     String strJson = JsonParser.getJSONFromURL(
         "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=60.391262&lon=5.322054");
 
-    String detailStr = "air_temperature";
-  
-          // limit på 86 i time par.
-    Object details = JsonParser.getTimeDetails(strJson, 0, detailStr);
-    WeatherView view = new WeatherView(details, detailStr);
-
-    
-    System.out.println(JsonParser.getMultipleTimeDetails(strJson, JsonParser.genericDetailsInfoList(), 0));
-
+        
+        // limit på 86 i "time" par.
+        //String detailStr = "air_temperature";
+   // Object details = JsonParser.getTimeDetails(strJson, 0, detailStr);
+    WeatherView view = new WeatherView(JsonParser.getMultipleTimeDetails(strJson, JsonParser.genericDetailsInfoList(), 0), JsonParser.genericDetailsInfoList());
+    Grid board = new Grid<>(15, 10);
+    System.out.println(JsonParser.getNextHoursDetails(50, strJson));
 
     JFrame frame = new JFrame();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

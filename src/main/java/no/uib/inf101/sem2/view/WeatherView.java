@@ -4,20 +4,22 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 public class WeatherView extends JPanel {
 
 
     // we want the information from jsonparser to this class, since we would like to know the time, detailsstirng (without having a par.) and etc.
 
-    public Object temperatureString;
-    public String detailsInfo;
+    public ArrayList<Object> temperatureString;
+    public ArrayList<String> detailsInfo;
 
     // perhaps these parameters should be generalized, since one could have an array of them, or just one object?
-    public WeatherView(Object temperature, String detailsString){
-        this.setPreferredSize(new Dimension(500, 500));
+    public WeatherView(ArrayList<Object> temperature, ArrayList<String> detailsString){
+        this.setPreferredSize(new Dimension(800, 800));
         this.temperatureString = temperature;
         this.detailsInfo = detailsString;
 
@@ -27,14 +29,31 @@ public class WeatherView extends JPanel {
       super.paintComponent(g);
       Graphics2D g2 = (Graphics2D) g;
       
-      // Draw a centered rectangle with text
-      Rectangle2D rect =  new Rectangle2D.Double(50, 50, getWidth() - 100, getHeight() - 100);
-      Color color = Color.BLACK;
-      g2.setColor(color);
-      g2.draw(rect);
-      Inf101Graphics.drawCenteredString(g2, this.detailsInfo + this.temperatureString , rect);
-    
+        drawMainGeneric(g2);
     }
+
+    /**
+     * Used to print each string as a newline
+     */
+    private void drawString(Graphics g, String text, int x, int y) {
+        for (String line : text.split("\n"))
+            g.drawString(line, x, y += g.getFontMetrics().getHeight());
+
+    }
+      // generell informasjon som første ting på siden
+      public void drawMainGeneric(Graphics2D graphics2d){
+
+        for(int i = 0; i < this.temperatureString.size(); i++) {
+            graphics2d.setFont(new Font("Arial", Font.BOLD, 20));
+            drawString(graphics2d, this.temperatureString.get(i) + " ", this.getWidth()/3, 20 + (i*20));
+        }
+       
+
+
+
+
+
+      }
 
 
 
