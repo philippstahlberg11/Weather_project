@@ -2,6 +2,8 @@ package no.uib.inf101.sem2.view;
 
 import javax.swing.JPanel;
 
+import no.uib.inf101.sem2.modell.WeatherModell;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -18,10 +20,10 @@ public class WeatherView extends JPanel {
     public ArrayList<String> detailsInfo;
 
     // perhaps these parameters should be generalized, since one could have an array of them, or just one object?
-    public WeatherView(ArrayList<Object> temperature, ArrayList<String> detailsString){
+    public WeatherView(WeatherModell viewWeatherModell){
         this.setPreferredSize(new Dimension(800, 800));
-        this.temperatureString = temperature;
-        this.detailsInfo = detailsString;
+        this.temperatureString = viewWeatherModell.getMultipleTimeDetails(viewWeatherModell.genericDetailsInfoList(), 0);
+        this.detailsInfo = viewWeatherModell.genericDetailsInfoList();
 
     }
     @Override

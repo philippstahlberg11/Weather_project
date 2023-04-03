@@ -3,8 +3,15 @@ package no.uib.inf101.sem2.modell;
 import java.util.ArrayList;
 
 public interface IWeatherModell {
-    
+// add all javadocs!
 
+
+    /**
+     * Shows us what the value of any detail has, and it's corresponding unit
+     * @param time from what time, current time = 0.
+     * @param detailString the string that tells what information you want to get.
+     * @return the specific detail information and it's corresponding unit.
+     */
     String getTimeDetails(int time, String detailString);
 
     Object getDetailsUnit(String detailString);
@@ -15,8 +22,9 @@ public interface IWeatherModell {
 
     ArrayList<String> genericDetailsInfoList();
 
-    ArrayList<Object> getNextHoursDetails(int timeLimit);
+    ArrayList<String> getNextHoursDetails(int timeLimit);
 
+    
 
 
 

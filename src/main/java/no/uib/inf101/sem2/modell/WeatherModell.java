@@ -14,22 +14,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 //import org.json.simple.parser.JSONParser;
 
-import no.uib.inf101.sem2.view.WeatherView;
+import no.uib.inf101.sem2.grid.GridCell;
+import no.uib.inf101.sem2.grid.GridDimension;
+import no.uib.inf101.sem2.view.IWeatherView;
 
 
-public class WeatherModell implements IWeatherModell{
+
+public class WeatherModell implements IWeatherModell, IWeatherView{
 
     private String jsonStr;
 
     public WeatherModell(String jsonString){
-
         this.jsonStr = jsonString;
 
-
+        
     }
      
         public String getTimeDetails(int time, String detailString){
             // gets the most generic information, about wind, temperature, wind-direction etc. (check test.json for example.)
+            
+            if(detailString == "-"){
+                return(" ");
+            }
+            if(detailString == "time"){
+                return(getNextHoursDetails(2).get(0));
+            }
                 try {
                     JSONObject jsonObj = new JSONObject(this.jsonStr);
                     JSONObject jsonObect = jsonObj.getJSONObject("properties");
@@ -43,9 +52,7 @@ public class WeatherModell implements IWeatherModell{
                     return (data_details_instant_temp.get(detailString) + " " + getDetailsUnit(detailString));
         
                 } catch (JSONException e) {
-                    // TODO Auto-generated catch block
                     throw new JSONException(e);
-                    //e.printStackTrace();
                 }
 
                 
@@ -67,9 +74,7 @@ public class WeatherModell implements IWeatherModell{
     
     
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
                 throw new JSONException(e);
-                //e.printStackTrace();
             }
         
     }
@@ -93,7 +98,6 @@ public class WeatherModell implements IWeatherModell{
         ArrayList<String> genericInfo = new ArrayList<>();
 
         genericInfo.add("air_temperature");
-        genericInfo.add("cloud_area_fraction");
         genericInfo.add("ultraviolet_index_clear_sky");
         genericInfo.add("relative_humidity");
         genericInfo.add("wind_speed");
@@ -106,10 +110,10 @@ public class WeatherModell implements IWeatherModell{
 
      }
 
-     public ArrayList<Object> getNextHoursDetails(int timeLimit){
+     public ArrayList<String> getNextHoursDetails(int timeLimit){
 
         // ha en arraylist til hver time som er også få de mest generic-infoen om hver av timene:
-        ArrayList<Object> nextHourgenericInfo = new ArrayList<>();
+        ArrayList<String> nextHourgenericInfo = new ArrayList<>();
 
         for(int i = 0; i < timeLimit; i ++){
                     JSONObject jsonObj = new JSONObject(this.jsonStr);
@@ -118,15 +122,12 @@ public class WeatherModell implements IWeatherModell{
                     JSONObject data_object = ja_data.getJSONObject(i);
 
                     nextHourgenericInfo.add(data_object.getString("time"));
-                    nextHourgenericInfo.add( getMultipleTimeDetails(genericDetailsInfoList(), i));
 
         }
 
         return nextHourgenericInfo;
 
      }
- 
-
-        
+         
     }
 
