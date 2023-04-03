@@ -102,7 +102,7 @@ public class TetrisView extends JPanel {
       graphics2d.setColor(Color.LIGHT_GRAY);
       graphics2d.fill(rektangel);
       graphics2d.setColor(Color.BLACK);
-      Inf101Graphics.drawCenteredString(graphics2d, modell.getTimeDetails((i.pos().row()), i.value()) , rektangel);
+      Inf101Graphics.drawCenteredString(graphics2d, i.value() , rektangel);
     }
    
   }

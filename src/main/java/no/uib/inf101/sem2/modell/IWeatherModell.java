@@ -2,6 +2,8 @@ package no.uib.inf101.sem2.modell;
 
 import java.util.ArrayList;
 
+import no.uib.inf101.sem2.grid.GridDimension;
+
 public interface IWeatherModell {
 // add all javadocs!
 
@@ -24,8 +26,8 @@ public interface IWeatherModell {
 
     ArrayList<String> getNextHoursDetails(int timeLimit);
 
-    
+    String convertTimeToHours(String time);
 
-
+    public String iconString(int timeNext, int time);
 
 }

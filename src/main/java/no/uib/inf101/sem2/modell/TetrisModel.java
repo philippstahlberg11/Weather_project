@@ -36,9 +36,10 @@ public class TetrisModel implements ViewableTetrisModel {
     public void testRowsCols(){
         // set new values for new col
     for(int row = 0; row < tetrisBoard.rows(); row++){
-       tetrisBoard.set(new CellPosition(row, 0), "time");
-        for(int col = 1; col < tetrisBoard.cols(); col++){
-          tetrisBoard.set(new CellPosition(row, col), modellWeather.genericDetailsInfoList().get(col-1));
+       tetrisBoard.set(new CellPosition(row, 0), modellWeather.convertTimeToHours(modellWeather.getNextHoursDetails(tetrisBoard.rows()).get(row)));
+       tetrisBoard.set(new CellPosition(row, 1), modellWeather.iconString( 0, 0));
+        for(int col = 2; col < tetrisBoard.cols(); col++){
+          tetrisBoard.set(new CellPosition(row, col), modellWeather.getTimeDetails(row, modellWeather.genericDetailsInfoList().get(col-1))) ;
           
       }
     

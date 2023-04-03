@@ -23,6 +23,7 @@ import no.uib.inf101.sem2.view.IWeatherView;
 public class WeatherModell implements IWeatherModell, IWeatherView{
 
     private String jsonStr;
+    private Boolean value = false;
 
     public WeatherModell(String jsonString){
         this.jsonStr = jsonString;
@@ -33,11 +34,9 @@ public class WeatherModell implements IWeatherModell, IWeatherView{
         public String getTimeDetails(int time, String detailString){
             // gets the most generic information, about wind, temperature, wind-direction etc. (check test.json for example.)
             
+            // in case if we need to set something no nothing:
             if(detailString == "-"){
-                return(" ");
-            }
-            if(detailString == "time"){
-                return(getNextHoursDetails(2).get(0));
+                return("");
             }
                 try {
                     JSONObject jsonObj = new JSONObject(this.jsonStr);
@@ -128,6 +127,42 @@ public class WeatherModell implements IWeatherModell, IWeatherView{
         return nextHourgenericInfo;
 
      }
+
+     public String convertTimeToHours(String time){
+        // 2023-04-03T15:00:00Z¨
+        String[] arr = time.split("-|:|T|Z");
+        // arr (eks.) : [2023, 04, 03, 15, 00, 00]
+        return arr[3];
+    }
+
+    public String iconString(int timeNext, int time){
+        //System.out.println(getOnlyJsonValues(strJson));
+        ArrayList<Integer> i = new ArrayList<>();
+        i.add(1);
+        i.add(6);
+        i.add(12);
+
+
+            JSONObject jsonObj = new JSONObject(this.jsonStr);
+            JSONObject jsonObect = jsonObj.getJSONObject("properties");
+            JSONArray ja_data = jsonObect.getJSONArray("timeseries");
+            JSONObject data_object = ja_data.getJSONObject(time);
+            JSONObject data_videre =  data_object.getJSONObject("data");
+            JSONObject data_enda_videre = data_videre.getJSONObject("next_" + i.get(timeNext) + "_hours");
+            JSONObject data_details_instant_temp = data_enda_videre.getJSONObject("summary");
+
+            // få tak i unit til temperatur
+            //System.out.println(ja_data_data.getString("time"));
+            return data_details_instant_temp.getString("symbol_code") + "";
+
+   
+      
+}
+     
+
+     
          
     }
+
+
 

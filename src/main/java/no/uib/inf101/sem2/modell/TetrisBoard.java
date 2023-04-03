@@ -12,7 +12,7 @@ public class TetrisBoard extends Grid<String> {
      * @param columns
      */
     public TetrisBoard(int rows, int columns) {
-        super(rows, columns, "-");
+        super(rows, columns, "");
 
         
     }

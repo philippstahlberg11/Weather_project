@@ -41,21 +41,19 @@ public class Main {
 
 
 
-    // we should move this somewhere else from main!
+
     TetrisBoard board = new TetrisBoard(6, modell.genericDetailsInfoList().size());
-    
-    // beware!
 
     //board.set(new CellPosition(0, 0),"air_pressure_at_sea_level");
     //board.set(new CellPosition(0, 3),"air_pressure_at_sea_level");
-    //board.set(new CellPosition(2, 0),"air_pressure_at_sea_level");
+    //board.set(new CellPosition(2, 0),"air_pressure_at_sea_level"); 
     //board.set(new CellPosition(2, 3),"air_pressure_at_sea_level");
 
     TetrisModel model = new TetrisModel(board, modell);
     model.testRowsCols();
     TetrisView view2 = new TetrisView(model, modell);
 
-    System.out.println(modell.getNextHoursDetails(2).get(0));
+    
         // limit på 86 i "time" par.
 
 
