@@ -21,9 +21,11 @@ import org.json.JSONObject;
 import no.uib.inf101.sem2.grid.Grid;
 import no.uib.inf101.sem2.grid.IGrid;
 import no.uib.inf101.sem2.modell.WeatherModell;
+import no.uib.inf101.sem2.modell.showGrid;
 import no.uib.inf101.sem2.modell.JsonString;
 import no.uib.inf101.sem2.modell.TetrisBoard;
 import no.uib.inf101.sem2.modell.TetrisModel;
+import no.uib.inf101.sem2.controller.WeatherController;
 import no.uib.inf101.sem2.grid.CellPosition;
 
 public class Main {
@@ -42,7 +44,7 @@ public class Main {
 
 
 
-    TetrisBoard board = new TetrisBoard(6, modell.genericDetailsInfoList().size());
+    TetrisBoard board = new TetrisBoard(7, modell.genericDetailsInfoList().size()+2);
 
     //board.set(new CellPosition(0, 0),"air_pressure_at_sea_level");
     //board.set(new CellPosition(0, 3),"air_pressure_at_sea_level");
@@ -50,9 +52,11 @@ public class Main {
     //board.set(new CellPosition(2, 3),"air_pressure_at_sea_level");
 
     TetrisModel model = new TetrisModel(board, modell);
-    model.testRowsCols();
+    showGrid i = new showGrid(board, modell);
+    //i.showGridFirst(0);
+   // i.showNextPage();
     TetrisView view2 = new TetrisView(model, modell);
-
+    WeatherController controller = new WeatherController(i, view2);
     
         // limit på 86 i "time" par.
 

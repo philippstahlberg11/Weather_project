@@ -1,4 +1,7 @@
 package no.uib.inf101.sem2.view;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import no.uib.inf101.sem2.grid.GridCell;
 import no.uib.inf101.sem2.grid.GridDimension;
 

@@ -8,18 +8,13 @@ public class TetrisBoard extends Grid<String> {
     /**
      * A Tetrisboard with given rows and coloumns
      * NOTE: default values are "-" if none given.
-     * @param rows 
+     * 
+     * @param rows
      * @param columns
      */
     public TetrisBoard(int rows, int columns) {
         super(rows, columns, "");
 
-        
     }
-    
 
-       
-
-    
 }
-
