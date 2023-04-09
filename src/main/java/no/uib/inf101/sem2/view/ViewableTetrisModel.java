@@ -23,6 +23,13 @@ public interface ViewableTetrisModel {
 
 
 
+   public BufferedImage IconToPicture(String value);
+
+
+
+   public Boolean checkIfIcon(String value);
+
+
 
 
 

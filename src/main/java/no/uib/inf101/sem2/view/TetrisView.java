@@ -8,6 +8,7 @@ import no.uib.inf101.sem2.modell.WeatherModell;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Window.Type;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
@@ -109,13 +110,17 @@ public class TetrisView extends JPanel {
     for (GridCell<String> i : iterableGridCell) {
       Rectangle2D rektangel = cellPositionToPixelConverter.getBoundsForCell(i.pos());
       // Color color = colorTheme.getCellColor(i.value());
-      graphics2d.setColor(Color.LIGHT_GRAY);
+      graphics2d.setColor(Color.WHITE);
       graphics2d.fill(rektangel);
-      graphics2d.setColor(Color.BLACK);
-      
-      // ta spesiell hensyn til ikoner senere!:
-
-      Inf101Graphics.drawCenteredString(graphics2d, i.value(), rektangel);
+      // ta spesiell hensyn til ikoner:
+      if(view.checkIfIcon(i.value())){
+        Inf101Graphics.drawCenteredImage(graphics2d, view.IconToPicture(i.value()), rektangel.getCenterX(), rektangel.getCenterY(), 0.35); 
+      }
+      else{
+        Color colorDifferent = colorTheme.getRowsDefaultColors().get(i.pos().col());
+        graphics2d.setColor(colorDifferent);
+       Inf101Graphics.drawCenteredString(graphics2d, i.value(), rektangel);
+      }
     }
   }
 

@@ -4,8 +4,8 @@ import no.uib.inf101.sem2.modell.showGrid;
 import no.uib.inf101.sem2.view.TetrisView;
 
 import java.awt.Dimension;
-import java.awt.event.*;  
-import javax.swing.*;  
+import java.awt.event.*;
+import javax.swing.*;
 
 public class WeatherController implements java.awt.event.KeyListener, ActionListener {
 
@@ -15,9 +15,7 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
     JButton nextButton = new JButton("Next Page");
     JButton previousButton = new JButton("Previous Page");
 
-
-
-    public WeatherController(showGrid showGrid, TetrisView view){
+    public WeatherController(showGrid showGrid, TetrisView view) {
         this.showgrid = showGrid;
         this.view = view;
 
@@ -25,11 +23,11 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
         view.addKeyListener(this);
         this.showgrid.showGridFirst(0);
 
-        // method for initialising button for next!
+        // method for initialising button for next! (and previous with same logic)
 
         // https://stackoverflow.com/questions/3195666/how-to-place-a-jbutton-at-a-desired-location-in-a-jframe-using-java
-        // for hvordan en lager en knapp (JButton) og plasserer den 
-        //https://stackoverflow.com/questions/284899/how-do-you-add-an-actionlistener-onto-a-jbutton-in-java
+        // for hvordan en lager en knapp (JButton) og plasserer den
+        // https://stackoverflow.com/questions/284899/how-do-you-add-an-actionlistener-onto-a-jbutton-in-java
 
         this.view.setLayout(null);
         this.nextButton.setLayout(null);
@@ -37,40 +35,64 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
 
         nextButton.setVisible(true);
         previousButton.setVisible(true);
-        previousButton.setSize(new Dimension(100,50));
-        nextButton.setSize(new Dimension(100,50));
+        previousButton.setSize(new Dimension(100, 50));
+        nextButton.setSize(new Dimension(100, 50));
 
         this.view.add(previousButton);
         this.view.add(nextButton);
-        previousButton.setLocation(600, 600);
-        nextButton.setLocation(500, 500);
+        previousButton.setLocation(50, 625);
+        nextButton.setLocation(700, 625);
+        // get the height/width of the grid
         nextButton.addActionListener(e -> nextButtonPressed());
         previousButton.addActionListener(e -> previousButtonPressed());
 
-    }   
-
+    }
 
     private void nextButtonPressed() {
-        this.showgrid.showNextPage();
+
+        this.previousButton.setVisible(true);
+        try {
+            this.showgrid.showNextPage();
+
+        } catch (Exception e) {
+            this.nextButton.setVisible(false);
+        }
         this.view.repaint();
+
     }
 
     private void previousButtonPressed() {
-        this.showgrid.showPreviousPage();
+
+        this.nextButton.setVisible(true);
+        try {
+            this.showgrid.showPreviousPage();
+        } catch (Exception e) {
+            this.previousButton.setVisible(false);
+        }
         this.view.repaint();
     }
 
-
     @Override
     public void keyPressed(KeyEvent e) throws IndexOutOfBoundsException {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            //showgrid.showGridFirst(0);
-            this.showgrid.showNextPage();
-            view.repaint();
+        this.previousButton.setVisible(true);
+        try {
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                // showgrid.showGridFirst(0);
+                this.showgrid.showNextPage();
+            }
+        } catch (Exception e1) {
+            this.nextButton.setVisible(false);
+            return;
         }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            this.showgrid.showPreviousPage();
-            view.repaint();
+        this.nextButton.setVisible(true);
+        try {
+
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                this.showgrid.showPreviousPage();
+            }
+        } catch (Exception e1) {
+            this.previousButton.setVisible(false);
+            return;
         }
         view.repaint();
     }
@@ -83,11 +105,9 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
     public void keyTyped(KeyEvent arg0) {
     }
 
-
     @Override
     public void actionPerformed(ActionEvent arg0) {
         // generell formel for alle knapper evt...
     }
-    
- 
+
 }

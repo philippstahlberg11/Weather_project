@@ -1,5 +1,6 @@
 package no.uib.inf101.sem2.view;
 import java.awt.Color;
+import java.util.ArrayList;
 
 
 public interface ColorTheme {
@@ -27,4 +28,11 @@ public interface ColorTheme {
      */
     Color getTranspoarentColor();
 
+
+    /**
+     * Gets the different rows-colors, this is some default value
+     * @return
+     */
+    ArrayList<Color> getRowsDefaultColors();
+    
 }

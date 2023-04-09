@@ -5,6 +5,7 @@ import no.uib.inf101.sem2.view.TetrisView;
 import no.uib.inf101.sem2.view.WeatherView;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,8 +67,11 @@ public class Main {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("INF101");
     frame.setContentPane(view2);
+    frame.setLayout(null);
     frame.pack();
     frame.setVisible(true);
+   // frame.setSize(new Dimension(500,500));
+
 
   }
 }

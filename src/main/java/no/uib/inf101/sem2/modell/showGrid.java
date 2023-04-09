@@ -1,6 +1,9 @@
 package no.uib.inf101.sem2.modell;
 
+import java.awt.image.BufferedImage;
+
 import no.uib.inf101.sem2.grid.CellPosition;
+import no.uib.inf101.sem2.view.Inf101Graphics;
 
 
 public class showGrid extends TetrisModel {
@@ -23,7 +26,6 @@ public class showGrid extends TetrisModel {
     // vi bør heller ha det slik at showGridFirst(har en par.) som er initialvalue = 0, senere kan vi gjør at den blir lik tetrisBoard.rows() (altså at den går til neste side)
     // TODO: liten bug at vi "skipper" gjennom 2 timer, for hver side vi går videre med!
     
-
     public void showGridFirst(int initialValue) {
         // this will be our grid system (change name for it)
         this.value += initialValue;
@@ -40,7 +42,7 @@ public class showGrid extends TetrisModel {
             else if(row >= 12){
                 tetrisBoard.set(new CellPosition(row, 1), modellWeather.iconString(2, 0 + (this.value)));
             } else {
-                tetrisBoard.set(new CellPosition(row, 1), modellWeather.iconString(0, 0 + (this.value)));
+                tetrisBoard.set(new CellPosition(row, 1),  modellWeather.iconString(0, 0 + (this.value)));
             }
             // might change how this might work later? but since we start at col = 2, we never go trough the for loop tetrisBoard.cols() but rather to 
             // tetrisBoard.cols() - 2, meaning we are missing to elements:
@@ -61,16 +63,18 @@ public class showGrid extends TetrisModel {
     public void showNextPage(){
         // show the next page by adding the values to the grid respectivly!
           // set new values for new col
-        showGridFirst(tetrisBoard.rows());
+        showGridFirst(tetrisBoard.rows()-1);
     }
 
     // TODO: check if both next page and previous page shows the correct information
     public void showPreviousPage(){
         // show the prevoius pages by subtracting the values from the grid resprectivly!
           // set new values for new col
-          showGridFirst(-tetrisBoard.rows());
-
-
+          showGridFirst(-tetrisBoard.rows()+1);
     }
+ 
+
+
 }
+
 
