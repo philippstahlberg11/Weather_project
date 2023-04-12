@@ -21,7 +21,7 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
 
         view.setFocusable(true);
         view.addKeyListener(this);
-        this.showgrid.showGridFirst(0);
+        this.showgrid.showGridFirst(2);
 
         // method for initialising button for next! (and previous with same logic)
 
@@ -53,6 +53,8 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
         this.previousButton.setVisible(true);
         try {
             this.showgrid.showNextPage();
+            this.view.repaint();
+
 
         } catch (Exception e) {
             this.nextButton.setVisible(false);
@@ -66,6 +68,8 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
         this.nextButton.setVisible(true);
         try {
             this.showgrid.showPreviousPage();
+            this.view.repaint();
+
         } catch (Exception e) {
             this.previousButton.setVisible(false);
         }
@@ -79,6 +83,8 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 // showgrid.showGridFirst(0);
                 this.showgrid.showNextPage();
+                this.view.repaint();
+
             }
         } catch (Exception e1) {
             this.nextButton.setVisible(false);
@@ -89,6 +95,8 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
 
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 this.showgrid.showPreviousPage();
+                this.view.repaint();
+
             }
         } catch (Exception e1) {
             this.previousButton.setVisible(false);

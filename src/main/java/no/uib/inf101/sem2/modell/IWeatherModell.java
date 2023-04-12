@@ -2,6 +2,7 @@ package no.uib.inf101.sem2.modell;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 import no.uib.inf101.sem2.grid.GridDimension;
 
@@ -30,5 +31,14 @@ public interface IWeatherModell {
 
     public String iconString(int timeNext, int time);
 
+    public String getTimeDetailsGenerallString(int time, String detailString);
+
+    public String dateString(String time);
+
+    public double getAverageOfArray(List<String> arrayList);
+
+    public ArrayList<Integer> getUniqueValuesOnlyOfArray(ArrayList<Integer> arrayList);
+
+    public List<List<String>> getListOfMultipleTimeDetails(int timelimit, String detailString);
 
 }

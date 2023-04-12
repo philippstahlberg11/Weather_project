@@ -52,15 +52,17 @@ public class Main {
     //board.set(new CellPosition(2, 0),"air_pressure_at_sea_level"); 
     //board.set(new CellPosition(2, 3),"air_pressure_at_sea_level");
 
+     // limit på 86 i "time" par.
+
     TetrisModel model = new TetrisModel(board, modell);
     showGrid i = new showGrid(board, modell);
-    //i.showGridFirst(0);
-   // i.showNextPage();
     TetrisView view2 = new TetrisView(model, modell);
     WeatherController controller = new WeatherController(i, view2);
-    
-        // limit på 86 i "time" par.
 
+
+    
+       
+    System.out.println(modell.getAverageOfArray( modell.getListOfMultipleTimeDetails(10, "air_temperature").get(0)));
 
 
     JFrame frame = new JFrame();
@@ -72,6 +74,9 @@ public class Main {
     frame.setVisible(true);
    // frame.setSize(new Dimension(500,500));
 
+
+
+   
 
   }
 }

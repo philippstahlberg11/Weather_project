@@ -1,6 +1,5 @@
 package no.uib.inf101.sem2.modell;
 
-import java.awt.List;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,6 +8,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,8 +31,7 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         this.jsonStr = jsonString;
 
     }
-
-    public String getTimeDetails(int time, String detailString) {
+    public String getTimeDetailsGenerallString(int time, String detailString) {
         // gets the most generic information, about wind, temperature, wind-direction
         // etc. (check test.json for example.)
 
@@ -47,12 +48,47 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
             JSONObject data_enda_videre = data_videre.getJSONObject("instant");
             JSONObject data_details_instant_temp = data_enda_videre.getJSONObject("details");
 
-            return (data_details_instant_temp.get(detailString) + " " + getDetailsUnit(detailString));
+            return (data_details_instant_temp.get(detailString) + "");
 
         } catch (JSONException e) {
-            throw new JSONException(e);
+            try {
+                throw new JSONException(e);
+            } catch (JSONException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
+        return detailString;
 
+    }
+
+    public String getTimeDetails(int time, String detailString) {
+        // gets the most generic information, about wind, temperature, wind-direction
+        // etc. (check test.json for example.)
+
+        // in case if we need to set something no nothing:
+        if (detailString == "-") {
+            return ("");
+        }
+         return (getTimeDetailsGenerallString(time, detailString) + " " + getDetailsUnit(detailString));
+
+
+    }
+    public double getAverageOfArray(List<String> arrayList){
+
+        int average = 0;
+        for(String i : arrayList){
+            try{
+            i = i.replaceAll("\\s+", "");
+            average += Double.parseDouble(i);
+            }
+            catch(Exception e){
+                System.out.println("INVALID LIST :" + e);
+            }
+        }
+        average = average/(arrayList.size());
+
+        return average;
     }
 
     public Object getDetailsUnit(String detailString) {
@@ -88,6 +124,16 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         // corresponding to eachother
         return timeDetailsList;
 
+    }
+    public ArrayList<Integer> getUniqueValuesOnlyOfArray(ArrayList<Integer> arrayList){
+
+        ArrayList<Integer> newList = new ArrayList<>();
+        Set<Integer> uniqueGas = new HashSet<Integer>(arrayList);
+
+        for(Integer u : uniqueGas){
+            newList.add(u);
+        }
+        return newList;
     }
 
     public ArrayList<String> genericDetailsInfoList() {
@@ -150,6 +196,12 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         // arr (eks.) : [2023, 04, 03, 15, 00, 00]
         return arr[3];
     }
+    public String dateString(String time){
+        // 2023-04-03T15:00:00Z¨
+        String[] arr = time.split("-|:|T|Z");
+        // arr (eks.) : [2023, 04, 03, 15, 00, 00]
+        return arr[2];
+    }
 
     public String iconString(int timeNext, int time) {
         // System.out.println(getOnlyJsonValues(strJson));
@@ -171,6 +223,41 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         // få tak i unit til temperatur
         // System.out.println(ja_data_data.getString("time"));
         return data_details_instant_temp.getString("symbol_code") + "";
+
+    }
+    public List<List<String>> getListOfMultipleTimeDetails(int timelimit, String detailString){
+
+
+        List<List<String>> listOfLists = new ArrayList<List<String>>(); 
+        ArrayList<Integer> somelist = new ArrayList<>();
+
+        int constant = 0;
+        //correctDate[2]
+        for (int i = 0; i < timelimit; i++){
+            Integer u = Integer.parseInt(dateString(getNextHoursDetails(timelimit).get(i)));
+            somelist.add(u);
+            listOfLists.add(new ArrayList<String>());
+            try{
+                //System.out.println(getUniqueValuesOnlyOfArray(somelist));
+                if(u.equals(getUniqueValuesOnlyOfArray(somelist).get(constant))){
+                    listOfLists.get(constant).add(getTimeDetailsGenerallString( i, detailString));
+                    
+                  //  nextHArrayList.add(getTimeDetails(strJson, i, "air_temperature"));
+                  //  nextHArrayList.set(i, nextHArrayList.get(i).replaceAll("\\s+",""));
+                }
+                else{
+                    constant++;
+                    listOfLists.get(constant).add(getTimeDetailsGenerallString( i, detailString));
+                    // next date!
+                }
+            }
+            catch(Exception e){
+                e.printStackTrace();
+
+            }
+        }
+        return listOfLists;
+
 
     }
 
