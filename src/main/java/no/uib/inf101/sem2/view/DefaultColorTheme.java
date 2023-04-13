@@ -37,7 +37,7 @@ public class DefaultColorTheme implements ColorTheme {
 
     @Override
     public Color getBackgroundColor() {
-        return Color.BLACK;
+        return Color.WHITE;
     }
 
     @Override

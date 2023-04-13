@@ -42,7 +42,7 @@ public class TetrisView extends JPanel {
     this.colorTheme = new DefaultColorTheme();
     this.modellWeather = modell;
 
-    this.setPreferredSize(new Dimension(800, 680));
+    this.setPreferredSize(new Dimension(400, 680));
     this.setFocusable(true);
     this.setBackground(colorTheme.getBackgroundColor());
 

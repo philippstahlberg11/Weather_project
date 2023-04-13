@@ -21,8 +21,8 @@ public class WeatherView extends JPanel {
 
     // perhaps these parameters should be generalized, since one could have an array of them, or just one object?
     public WeatherView(WeatherModell viewWeatherModell){
-        this.setPreferredSize(new Dimension(800, 800));
-        this.temperatureString = viewWeatherModell.getMultipleTimeDetails(viewWeatherModell.genericDetailsInfoList(), 0);
+        this.setPreferredSize(new Dimension(250, 150));
+        this.temperatureString = viewWeatherModell.getMultipleTimeDetails(viewWeatherModell.genericDetailsInfoList(), 2);
         this.detailsInfo = viewWeatherModell.genericDetailsInfoList();
 
     }
