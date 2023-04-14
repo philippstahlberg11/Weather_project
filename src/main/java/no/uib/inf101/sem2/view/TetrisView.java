@@ -1,5 +1,6 @@
 package no.uib.inf101.sem2.view;
 
+import javax.swing.Icon;
 import javax.swing.JPanel;
 import javax.swing.text.View;
 
@@ -8,11 +9,15 @@ import no.uib.inf101.sem2.modell.WeatherModell;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.SystemTray;
 import java.awt.Window.Type;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -25,6 +30,8 @@ public class TetrisView extends JPanel {
 
   private static final double OUTERMARGIN = 15;
   private static final double INNERMARGIN = 5;
+
+  private HashMap<String, BufferedImage> imageMaps;
 
   public WeatherModell modellWeather;
 
@@ -42,9 +49,14 @@ public class TetrisView extends JPanel {
     this.colorTheme = new DefaultColorTheme();
     this.modellWeather = modell;
 
-    this.setPreferredSize(new Dimension(400, 680));
+    this.setPreferredSize(new Dimension(100, 680));
     this.setFocusable(true);
     this.setBackground(colorTheme.getBackgroundColor());
+
+
+
+    this.imageMaps = viewableTetrisModel.IconToPicture();
+  
 
   }
 
@@ -55,6 +67,7 @@ public class TetrisView extends JPanel {
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
+
     drawGame(g2);
 
   }
@@ -78,13 +91,14 @@ public class TetrisView extends JPanel {
     graphics2d.setColor(this.colorTheme.getFrameColor());
     graphics2d.fill(box);
 
+   
     CellPositionToPixelConverter cellposition = new CellPositionToPixelConverter(box,
         this.viewableTetrisModel.getDimension(), INNERMARGIN);
 
-    // drawing each of the cells that will be in our "background" meaning stationary
+    // drawing each of the cells that wi ll be in our "background" meaning stationary
     // cells
     drawCells(graphics2d, this.viewableTetrisModel.getTilesOnBoard(), cellposition, this.colorTheme,
-        viewableTetrisModel);
+        viewableTetrisModel, imageMaps);
 
   }
 
@@ -101,12 +115,13 @@ public class TetrisView extends JPanel {
    *                                     cells to them
    */
   public static void drawCells(Graphics2D graphics2d, Iterable<GridCell<String>> iterableGridCell,
-      CellPositionToPixelConverter cellPositionToPixelConverter, ColorTheme colorTheme, ViewableTetrisModel view) {
+      CellPositionToPixelConverter cellPositionToPixelConverter, ColorTheme colorTheme, ViewableTetrisModel view, HashMap<String, BufferedImage> imageS) {
 
     // Going trougn each of the elements in the iterableGridCell
     // "fillings" each of these to a rectangle, and then setting the corresponding
     // color
     // with the position of the cell.
+
     for (GridCell<String> i : iterableGridCell) {
       Rectangle2D rektangel = cellPositionToPixelConverter.getBoundsForCell(i.pos());
       // Color color = colorTheme.getCellColor(i.value());
@@ -114,7 +129,14 @@ public class TetrisView extends JPanel {
       graphics2d.fill(rektangel);
       // ta spesiell hensyn til ikoner:
       if(view.checkIfIcon(i.value())){
-        Inf101Graphics.drawCenteredImage(graphics2d, view.IconToPicture(i.value()), rektangel.getCenterX(), rektangel.getCenterY(), 0.35); 
+        //Image scaledImage = view.IconToPicture(i.value()).getScaledInstance(50, 50, Image.SCALE_FAST);
+
+         // BufferedImage drawnBackground = view.IconToPicture(i.value());
+          double xValue = rektangel.getCenterX();
+          double yValue = rektangel.getCenterY();
+        
+        
+        Inf101Graphics.drawCenteredImage(graphics2d, imageS.get(i.value()), xValue, yValue, 0.35); 
       }
       else{
         Color colorDifferent = colorTheme.getRowsDefaultColors().get(i.pos().col());

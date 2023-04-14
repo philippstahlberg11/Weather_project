@@ -78,31 +78,6 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
 
     @Override
     public void keyPressed(KeyEvent e) throws IndexOutOfBoundsException {
-        this.previousButton.setVisible(true);
-        try {
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                // showgrid.showGridFirst(0);
-                this.showgrid.showNextPage();
-                this.view.repaint();
-
-            }
-        } catch (Exception e1) {
-            this.nextButton.setVisible(false);
-            return;
-        }
-        this.nextButton.setVisible(true);
-        try {
-
-            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                this.showgrid.showPreviousPage();
-                this.view.repaint();
-
-            }
-        } catch (Exception e1) {
-            this.previousButton.setVisible(false);
-            return;
-        }
-        view.repaint();
     }
 
     @Override

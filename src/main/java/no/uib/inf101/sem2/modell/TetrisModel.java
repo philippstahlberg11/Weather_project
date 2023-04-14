@@ -1,7 +1,9 @@
 package no.uib.inf101.sem2.modell;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.validation.ValidatorHandler;
 
@@ -37,35 +39,26 @@ public class TetrisModel implements ViewableTetrisModel {
 
     }
 
-    @Override
-    public BufferedImage IconToPicture(String value) {
+    public HashMap<String, BufferedImage> IconToPicture() {
             BufferedImage sunny_test = Inf101Graphics.loadImageFromResources("/sunny_sun.png");
             BufferedImage partlyClodyNight = Inf101Graphics.loadImageFromResources("/PartlyCloudy.Night.png");
             BufferedImage partlyCloudyDay = Inf101Graphics.loadImageFromResources("/PartlyCloudy_day.png");
             BufferedImage Cloudy = Inf101Graphics.loadImageFromResources("/Cloudy.png");
-            BufferedImage Rainy = Inf101Graphics.loadImageFromResources("/rainy.png");
             BufferedImage light_rain = Inf101Graphics.loadImageFromResources("/light_rain.png");
+            BufferedImage Rainy = Inf101Graphics.loadImageFromResources("/rainy.png");
 
 
 
+            HashMap<String, BufferedImage> imageMap = new HashMap<>();
+            imageMap.put("partlycloudy_night",partlyClodyNight);
+            imageMap.put("cloudy",Cloudy);
+            imageMap.put("partlycloudy_day",partlyCloudyDay);
+            imageMap.put("lightrain", light_rain);
+            imageMap.put("rain",Rainy);
+            imageMap.put("-", sunny_test);
 
-    
-            if(value.equals("partlycloudy_night")){
-                    return partlyClodyNight;
-            }
-            else if(value.equals("cloudy")){
-                return Cloudy;
-            }
-            else if(value.equals("partlycloudy_day")){
-                return partlyCloudyDay;
-            }
-            else if(value.equals("lightrain")){
-                return light_rain;
-            }
-            else if(value.equals("rain")){
-                return Rainy;
-            }
-            return sunny_test;
+
+            return imageMap;
         
     }
 

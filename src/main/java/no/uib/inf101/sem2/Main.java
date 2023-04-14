@@ -88,12 +88,12 @@ public class Main {
     // for å få en inspirasjon til scrollable side!
 
     JFrame frame = new JFrame();
- /*    final JScrollPane scrPane = new JScrollPane() {
+    final JScrollPane scrPane = new JScrollPane() {
       @Override
       public Dimension getPreferredSize() {
          return new Dimension(PREF_W, PREF_H);
       }
-   }; */
+   };
 
     containerPane = new JPanel();
    
@@ -102,9 +102,9 @@ public class Main {
     containerPane.setLayout(new GridLayout(1, 1));
     bottomPane.setLayout(new BorderLayout());
 
- /*   
+   
     scrPane.setViewportView(containerPane);
-   */
+  
 
     bottomPane.add(view, BorderLayout.BEFORE_FIRST_LINE);
     bottomPane.add(new JLabel("Day-for-Day-info-grid--------------------------------------"), BorderLayout.CENTER);
@@ -116,14 +116,14 @@ public class Main {
     containerPane.add(bottomPane);
 
   
-/* 
+
     scrPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     scrPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
- */
+
    
 
-    frame.getContentPane().add(containerPane);
+   /*  frame.getContentPane().add(containerPane); */
    // frame.add(scrPane);
    
 
@@ -133,7 +133,7 @@ public class Main {
     //frame.setContentPane(containerPane);
    // frame.setSize(700, 680);
 
-   /*  frame.add(scrPane); */
+    frame.add(scrPane);
    // frame.setLayout(null);
     frame.pack();
     frame.setLocationRelativeTo(null);
