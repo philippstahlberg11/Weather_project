@@ -1,5 +1,6 @@
 package no.uib.inf101.sem2;
 
+import no.uib.inf101.sem2.view.Inf101Graphics;
 import no.uib.inf101.sem2.view.SampleView;
 import no.uib.inf101.sem2.view.TetrisView;
 import no.uib.inf101.sem2.view.WeatherView;
@@ -8,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +31,8 @@ import org.json.JSONObject;
 import no.uib.inf101.sem2.grid.Grid;
 import no.uib.inf101.sem2.grid.IGrid;
 import no.uib.inf101.sem2.modell.WeatherModell;
-import no.uib.inf101.sem2.modell.showGrid;
+import no.uib.inf101.sem2.modell.showDayGrid;
+import no.uib.inf101.sem2.modell.showTimeGrid;
 import no.uib.inf101.sem2.modell.JsonObject;
 import no.uib.inf101.sem2.modell.TetrisBoard;
 import no.uib.inf101.sem2.modell.TetrisModel;
@@ -49,6 +52,9 @@ public class Main {
     System.setProperty("http.agent", "Chrome");
     String url = "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=60.391262&lon=5.322054";
 
+
+
+    
     JsonObject stringJson = new JsonObject(url);
     // gives the option to either have a jsonobject from a url/file:
     String stringJsonURL = stringJson.getJSONFromURL();
@@ -60,22 +66,25 @@ public class Main {
 
 
 
+    // TIME FOR TIME-----
     TetrisBoard board = new TetrisBoard(7, modell.genericDetailsInfoList().size()+2);
 
-    //board.set(new CellPosition(0, 0),"air_pressure_at_sea_level");
-    //board.set(new CellPosition(0, 3),"air_pressure_at_sea_level");
-    //board.set(new CellPosition(2, 0),"air_pressure_at_sea_level"); 
-    //board.set(new CellPosition(2, 3),"air_pressure_at_sea_level");
-
-     // limit på 86 i "time" par.
-
     TetrisModel model = new TetrisModel(board, modell);
-    showGrid i = new showGrid(board, modell);
+    showTimeGrid i = new showTimeGrid(board, modell);
     TetrisView view2 = new TetrisView(model, modell);
     WeatherController controller = new WeatherController(i, view2);
+    // TIME FOR TIME----
 
 
-    
+    // DAY FOR DAY_----
+    TetrisBoard board2 = new TetrisBoard(7, modell.genericDetailsInfoList().size()+2);
+
+    TetrisModel model2 = new TetrisModel(board2, modell);
+    showDayGrid i2 = new showDayGrid(board2, modell);
+    TetrisView view3 = new TetrisView(model2, modell);
+    WeatherController controller2 = new WeatherController(i2, view3);
+    // DAY FOR DAY___
+
        
     System.out.println(modell.getAverageOfArray( modell.getListOfMultipleTimeDetails(10, "air_temperature").get(0)));
 
@@ -107,7 +116,7 @@ public class Main {
   
 
     bottomPane.add(view, BorderLayout.BEFORE_FIRST_LINE);
-    bottomPane.add(new JLabel("Day-for-Day-info-grid--------------------------------------"), BorderLayout.CENTER);
+    bottomPane.add(view3,BorderLayout.CENTER);
     bottomPane.add(view2, BorderLayout.AFTER_LAST_LINE);
 
    // topPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), "Using GridLayout"));

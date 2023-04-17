@@ -1,6 +1,7 @@
 package no.uib.inf101.sem2.controller;
 
-import no.uib.inf101.sem2.modell.showGrid;
+import no.uib.inf101.sem2.modell.iShowGrid;
+import no.uib.inf101.sem2.modell.showTimeGrid;
 import no.uib.inf101.sem2.view.TetrisView;
 
 import java.awt.Dimension;
@@ -9,14 +10,15 @@ import javax.swing.*;
 
 public class WeatherController implements java.awt.event.KeyListener, ActionListener {
 
-    public showGrid showgrid;
     public TetrisView view;
 
     JButton nextButton = new JButton("Next Page");
     JButton previousButton = new JButton("Previous Page");
 
-    public WeatherController(showGrid showGrid, TetrisView view) {
-        this.showgrid = showGrid;
+    private iShowGrid showgrid;
+
+    public WeatherController(iShowGrid showGrid, TetrisView view) {
+        this.showgrid =  showGrid;
         this.view = view;
 
         view.setFocusable(true);

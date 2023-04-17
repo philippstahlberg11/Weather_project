@@ -46,6 +46,11 @@ public class TetrisModel implements ViewableTetrisModel {
             BufferedImage Cloudy = Inf101Graphics.loadImageFromResources("/Cloudy.png");
             BufferedImage light_rain = Inf101Graphics.loadImageFromResources("/light_rain.png");
             BufferedImage Rainy = Inf101Graphics.loadImageFromResources("/rainy.png");
+            BufferedImage Fair_night = Inf101Graphics.loadImageFromResources("/fair_night.png");
+            BufferedImage clear_sky_night = Inf101Graphics.loadImageFromResources("/clearsky_night.png");
+            BufferedImage fair_day = Inf101Graphics.loadImageFromResources("/fair_day.png");
+            BufferedImage clearsky_day = Inf101Graphics.loadImageFromResources("/clearsky_day.png");
+
 
 
 
@@ -55,6 +60,10 @@ public class TetrisModel implements ViewableTetrisModel {
             imageMap.put("partlycloudy_day",partlyCloudyDay);
             imageMap.put("lightrain", light_rain);
             imageMap.put("rain",Rainy);
+            imageMap.put("fair_night", Fair_night);
+            imageMap.put("clearsky_night", clear_sky_night);
+            imageMap.put("fair_day", fair_day);
+            imageMap.put("clearsky_day", clearsky_day);
             imageMap.put("-", sunny_test);
 
 

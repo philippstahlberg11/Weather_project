@@ -18,7 +18,6 @@ public class JsonObject {
         this.strName = name;
 
 
-     
     }
 
     public String getJSONFromFile() {

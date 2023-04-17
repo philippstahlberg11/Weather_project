@@ -35,7 +35,7 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         // gets the most generic information, about wind, temperature, wind-direction
         // etc. (check test.json for example.)
 
-        // in case if we need to set something no nothing:
+        // in case if we need to set something to nothing:
         if (detailString == "-") {
             return ("");
         }
@@ -83,7 +83,7 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
             average += Double.parseDouble(i);
             }
             catch(Exception e){
-                System.out.println("INVALID LIST :" + e);
+                e.printStackTrace();
             }
         }
         average = average/(arrayList.size());
@@ -196,7 +196,7 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         // arr (eks.) : [2023, 04, 03, 15, 00, 00]
         return arr[3];
     }
-    public String dateString(String time){
+    public String convertTimeToDate(String time){
         // 2023-04-03T15:00:00Z¨
         String[] arr = time.split("-|:|T|Z");
         // arr (eks.) : [2023, 04, 03, 15, 00, 00]
@@ -204,7 +204,6 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
     }
 
     public String iconString(int timeNext, int time) {
-        // System.out.println(getOnlyJsonValues(strJson));
         // choose between next_1_hours, next_6_hours, og next_12_hours... (beware:
         // next_12_hours often has a less stronger certanty)
         ArrayList<Integer> i = new ArrayList<>();
@@ -234,7 +233,7 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         int constant = 0;
         //correctDate[2]
         for (int i = 0; i < timelimit; i++){
-            Integer u = Integer.parseInt(dateString(getNextHoursDetails(timelimit).get(i)));
+            Integer u = Integer.parseInt(convertTimeToDate(getNextHoursDetails(timelimit).get(i)));
             somelist.add(u);
             listOfLists.add(new ArrayList<String>());
             try{

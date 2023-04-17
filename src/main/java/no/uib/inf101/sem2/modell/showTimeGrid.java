@@ -6,14 +6,14 @@ import no.uib.inf101.sem2.grid.CellPosition;
 import no.uib.inf101.sem2.view.Inf101Graphics;
 
 
-public class showGrid extends TetrisModel {
+public class showTimeGrid extends TetrisModel implements iShowGrid {
 
 
     public TetrisBoard tetrisBoard;
     public WeatherModell modellWeather;
     public int value;
 
-    public showGrid(TetrisBoard tetrisBoard, WeatherModell modellWeather){
+    public showTimeGrid(TetrisBoard tetrisBoard, WeatherModell modellWeather){
         super(tetrisBoard, modellWeather);
         this.tetrisBoard = tetrisBoard;
         this.modellWeather = modellWeather;
