@@ -34,6 +34,7 @@ import no.uib.inf101.sem2.modell.WeatherModell;
 import no.uib.inf101.sem2.modell.showDayGrid;
 import no.uib.inf101.sem2.modell.showTimeGrid;
 import no.uib.inf101.sem2.modell.JsonObject;
+import no.uib.inf101.sem2.modell.MarsModell;
 import no.uib.inf101.sem2.modell.TetrisBoard;
 import no.uib.inf101.sem2.modell.TetrisModel;
 import no.uib.inf101.sem2.controller.WeatherController;
@@ -52,16 +53,28 @@ public class Main {
     System.setProperty("http.agent", "Chrome");
     String url = "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=60.391262&lon=5.322054";
 
+    String MarsUrl = "https://api.maas2.apollorion.com/";
+
+    JsonObject MarsJson = new JsonObject(MarsUrl);
+    String stringMarsURL = MarsJson.getJSONFromURL();
+
+    MarsModell modellMars = new MarsModell(stringMarsURL);
+
+
 
 
     
+
+
+
+
+
     JsonObject stringJson = new JsonObject(url);
     // gives the option to either have a jsonobject from a url/file:
     String stringJsonURL = stringJson.getJSONFromURL();
-
     WeatherModell modell = new WeatherModell(stringJsonURL);
     // modell.getMultipleTimeDetails(modell.genericDetailsInfoList(), 0), modell.genericDetailsInfoList()
-    WeatherView view = new WeatherView(modell);
+    WeatherView view = new WeatherView(modell, modellMars);
 
 
 
@@ -76,8 +89,8 @@ public class Main {
     // TIME FOR TIME----
 
 
-    // DAY FOR DAY_----
-    TetrisBoard board2 = new TetrisBoard(7, modell.genericDetailsInfoList().size()+2);
+    // DAY FOR DAY_---- WE dont want to show to many days forwards (even YR.no dosent do that), since we dont have enough certain data to sustain our preferably certain data ....
+    TetrisBoard board2 = new TetrisBoard(3, modell.genericDetailsInfoList().size()+2);
 
     TetrisModel model2 = new TetrisModel(board2, modell);
     showDayGrid i2 = new showDayGrid(board2, modell);
@@ -86,8 +99,6 @@ public class Main {
     // DAY FOR DAY___
 
        
-    System.out.println(modell.getAverageOfArray( modell.getListOfMultipleTimeDetails(10, "air_temperature").get(0)));
-
 
 
     // Inspirert ifra denne siden: https://stackoverflow.com/questions/41685700/two-jpanels-in-one-jframe
@@ -120,21 +131,13 @@ public class Main {
     bottomPane.add(view2, BorderLayout.AFTER_LAST_LINE);
 
    // topPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), "Using GridLayout"));
-    bottomPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), "Using BorderLayout"));
+    //bottomPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLUE), "Using BorderLayout"));
 
     containerPane.add(bottomPane);
-
-  
 
     scrPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     scrPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-
-   
-
-   /*  frame.getContentPane().add(containerPane); */
-   // frame.add(scrPane);
-   
 
 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

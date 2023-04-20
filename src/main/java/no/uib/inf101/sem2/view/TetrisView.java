@@ -53,8 +53,7 @@ public class TetrisView extends JPanel {
     this.setFocusable(true);
     this.setBackground(colorTheme.getBackgroundColor());
 
-
-
+    // images/icons, being initilized with values!
     this.imageMaps = viewableTetrisModel.IconToPicture();
   
 

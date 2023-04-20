@@ -189,6 +189,28 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         return nextHourgenericInfo;
 
     }
+    public ArrayList<String> getNextHoursDetailsUnique(int timeLimit) {
+
+        // ha en arraylist til hver time som er også få de mest generic-infoen om hver
+        // av timene:
+        ArrayList<String> nextHourgenericInfo = new ArrayList<>();
+        ArrayList<String> newlist = new ArrayList<>();
+
+        for (int i = 0; i < timeLimit; i++) {
+            JSONObject jsonObj = new JSONObject(this.jsonStr);
+            JSONObject jsonObect = jsonObj.getJSONObject("properties");
+            JSONArray ja_data = jsonObect.getJSONArray("timeseries");
+            JSONObject data_object = ja_data.getJSONObject(i);
+
+            nextHourgenericInfo.add(data_object.getString("time"));
+
+            newlist.add(convertTimeToDate(nextHourgenericInfo.get(i)));
+        }
+
+      
+        return newlist;
+
+    }
 
     public String convertTimeToHours(String time) {
         // 2023-04-03T15:00:00Z¨
@@ -258,6 +280,12 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         return listOfLists;
 
 
+    }
+    @Override
+    public List<String> getUniqueValuesOnlyOfArrayString(List<String> arrayList) {
+        // TODO Auto-generated method stub
+        List<String> newList = new ArrayList<String>(new HashSet<String>(arrayList));
+        return newList;
     }
 
 

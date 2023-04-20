@@ -50,12 +50,15 @@ public class TetrisModel implements ViewableTetrisModel {
             BufferedImage clear_sky_night = Inf101Graphics.loadImageFromResources("/clearsky_night.png");
             BufferedImage fair_day = Inf101Graphics.loadImageFromResources("/fair_day.png");
             BufferedImage clearsky_day = Inf101Graphics.loadImageFromResources("/clearsky_day.png");
+            BufferedImage fog_day = Inf101Graphics.loadImageFromResources("/fog.png");
+
 
 
 
 
             HashMap<String, BufferedImage> imageMap = new HashMap<>();
             imageMap.put("partlycloudy_night",partlyClodyNight);
+            imageMap.put("fog",fog_day);
             imageMap.put("cloudy",Cloudy);
             imageMap.put("partlycloudy_day",partlyCloudyDay);
             imageMap.put("lightrain", light_rain);
@@ -74,7 +77,7 @@ public class TetrisModel implements ViewableTetrisModel {
     @Override
     public Boolean checkIfIcon(String value) {
        
-        if(value.contains("night") || value.contains("day") || value.contains("cloudy") || value.contains("rain")){
+        if(value.contains("night") || value.contains("day") || value.contains("cloudy") || value.contains("rain") || value.contains("fog")){
             return true;
         }
         else{

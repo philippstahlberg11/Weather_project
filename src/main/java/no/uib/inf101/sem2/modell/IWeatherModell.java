@@ -1,5 +1,6 @@
 package no.uib.inf101.sem2.modell;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,4 +110,5 @@ public interface IWeatherModell {
      */
     public List<List<String>> getListOfMultipleTimeDetails(int timelimit, String detailString);
 
+    public List<String> getUniqueValuesOnlyOfArrayString(List<String> arrayList);
 }

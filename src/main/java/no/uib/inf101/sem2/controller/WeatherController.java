@@ -1,6 +1,7 @@
 package no.uib.inf101.sem2.controller;
 
 import no.uib.inf101.sem2.modell.iShowGrid;
+import no.uib.inf101.sem2.modell.showDayGrid;
 import no.uib.inf101.sem2.modell.showTimeGrid;
 import no.uib.inf101.sem2.view.TetrisView;
 
@@ -23,13 +24,22 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
 
         view.setFocusable(true);
         view.addKeyListener(this);
+        if(showGrid instanceof showDayGrid){
+            // we dont want to be able to scroll trought so many days forwards since the data is extremly uncertain after just a few days forwards...
+            nextButton.setVisible(false);
+            previousButton.setVisible(false);
+            this.showgrid.showGridFirst(24+12);
+        }
+        else{
         this.showgrid.showGridFirst(2);
 
-        // method for initialising button for next! (and previous with same logic)
+        
+           // method for initialising button for next! (and previous with same logic)
 
         // https://stackoverflow.com/questions/3195666/how-to-place-a-jbutton-at-a-desired-location-in-a-jframe-using-java
         // for hvordan en lager en knapp (JButton) og plasserer den
         // https://stackoverflow.com/questions/284899/how-do-you-add-an-actionlistener-onto-a-jbutton-in-java
+
 
         this.view.setLayout(null);
         this.nextButton.setLayout(null);
@@ -44,9 +54,14 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
         this.view.add(nextButton);
         previousButton.setLocation(50, 625);
         nextButton.setLocation(700, 625);
+     
         // get the height/width of the grid
         nextButton.addActionListener(e -> nextButtonPressed());
         previousButton.addActionListener(e -> previousButtonPressed());
+        }
+     
+
+      
 
     }
 
