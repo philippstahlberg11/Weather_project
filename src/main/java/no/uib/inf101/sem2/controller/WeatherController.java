@@ -52,8 +52,9 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
 
         this.view.add(previousButton);
         this.view.add(nextButton);
+        // må justeres!
         previousButton.setLocation(50, 625);
-        nextButton.setLocation(700, 625);
+        nextButton.setLocation(1200, 625);
      
         // get the height/width of the grid
         nextButton.addActionListener(e -> nextButtonPressed());

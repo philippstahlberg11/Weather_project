@@ -24,11 +24,18 @@ public interface ViewableTetrisModel {
    Iterable<GridCell<String>> getTilesOnBoard();
 
 
-
+  /**
+   * Initialize the images, with the corresponding values
+   * @return an image, representing the correct value (i.e. sunny - sunny_picture etc.)
+   */
    public HashMap<String, BufferedImage> IconToPicture();
 
 
-
+  /**
+   * Check if we have an image-icon
+   * @param value a string, representing a value that might include a description of the weather
+   * @return true if we are working with a description of weather -string, false if not
+   */
    public Boolean checkIfIcon(String value);
 
 

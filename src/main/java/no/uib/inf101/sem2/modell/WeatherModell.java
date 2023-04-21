@@ -19,10 +19,9 @@ import org.json.JSONObject;
 
 import no.uib.inf101.sem2.grid.GridCell;
 import no.uib.inf101.sem2.grid.GridDimension;
-import no.uib.inf101.sem2.view.IWeatherView;
 import no.uib.inf101.sem2.view.Inf101Graphics;
 
-public class WeatherModell implements IWeatherModell, IWeatherView {
+public class WeatherModell implements IWeatherModell {
 
     private String jsonStr;
     private Boolean value = false;
@@ -66,7 +65,7 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
         // gets the most generic information, about wind, temperature, wind-direction
         // etc. (check test.json for example.)
 
-        // in case if we need to set something no nothing:
+        // in case if we need to set something to nothing:
         if (detailString == "-") {
             return ("");
         }
@@ -283,7 +282,6 @@ public class WeatherModell implements IWeatherModell, IWeatherView {
     }
     @Override
     public List<String> getUniqueValuesOnlyOfArrayString(List<String> arrayList) {
-        // TODO Auto-generated method stub
         List<String> newList = new ArrayList<String>(new HashSet<String>(arrayList));
         return newList;
     }

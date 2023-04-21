@@ -80,8 +80,7 @@ public class WeatherView extends JPanel {
 
 
 
-      //        if(value.contains("night") || value.contains("day") || value.contains("cloudy") || value.contains("rain") || value.contains("fog")){
-
+  
       if(detailsInfo.contains("day")){
         return day;
       }

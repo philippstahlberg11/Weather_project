@@ -72,12 +72,5 @@ public class MarsModell implements IMarsModell {
         return genericTitles;
     }
 
-    public String convertStringDateToString(String date){
-
-        String[] newDate = date.split("-");
-
-        return newDate[1] + "-" + newDate[2];
-        
-    }
     
 }

@@ -128,13 +128,9 @@ public class TetrisView extends JPanel {
       graphics2d.fill(rektangel);
       // ta spesiell hensyn til ikoner:
       if(view.checkIfIcon(i.value())){
-        //Image scaledImage = view.IconToPicture(i.value()).getScaledInstance(50, 50, Image.SCALE_FAST);
 
-         // BufferedImage drawnBackground = view.IconToPicture(i.value());
           double xValue = rektangel.getCenterX();
           double yValue = rektangel.getCenterY();
-        
-        
         Inf101Graphics.drawCenteredImage(graphics2d, imageS.get(i.value()), xValue, yValue, 0.35); 
       }
       else{

@@ -53,9 +53,6 @@ public class TetrisModel implements ViewableTetrisModel {
             BufferedImage fog_day = Inf101Graphics.loadImageFromResources("/fog.png");
 
 
-
-
-
             HashMap<String, BufferedImage> imageMap = new HashMap<>();
             imageMap.put("partlycloudy_night",partlyClodyNight);
             imageMap.put("fog",fog_day);
