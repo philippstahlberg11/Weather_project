@@ -6,9 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-import javax.swing.tree.ExpandVetoException;
-
-// copied from yt videos, getter-methods, that only help us get json-strings from files/urls
+//  Copied from the video : https://www.youtube.com/watch?v=yLf2-r8w9lQ&t=186s
+// to get the information from any json file/json url to a string!
 
 public class JsonObject {
 
@@ -16,7 +15,6 @@ public class JsonObject {
 
     public JsonObject(String name) {
         this.strName = name;
-
 
     }
 

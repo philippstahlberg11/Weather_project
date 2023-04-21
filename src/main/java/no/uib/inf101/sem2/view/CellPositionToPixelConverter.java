@@ -3,8 +3,7 @@ package no.uib.inf101.sem2.view;
 import no.uib.inf101.sem2.grid.CellPosition;
 import no.uib.inf101.sem2.grid.GridDimension;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+
 import java.awt.geom.Rectangle2D;
 
 public class CellPositionToPixelConverter {

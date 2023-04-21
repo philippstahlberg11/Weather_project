@@ -1,8 +1,5 @@
 package no.uib.inf101.sem2.modell;
 
-import java.awt.image.BufferedImage;
-
-import no.uib.inf101.sem2.grid.CellPosition;
 import no.uib.inf101.sem2.grid.Grid;
 
 public class TetrisBoard extends Grid<String> {
@@ -18,6 +15,5 @@ public class TetrisBoard extends Grid<String> {
         super(rows, columns, "");
 
     }
-
 
 }

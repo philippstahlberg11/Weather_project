@@ -8,7 +8,6 @@ import no.uib.inf101.sem2.modell.WeatherModell;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -37,17 +36,6 @@ public class WeatherView extends JPanel {
       super.paintComponent(g);
       Graphics2D g2 = (Graphics2D) g;
       
-
-    /*   int w = getWidth();
-      int h = getHeight();
-
-
-          // I stedet for å bruke setColor, kan vi bruke setPaint
-        // for å sette fargen til en GradientPaint
-        Color color1 = Color.BLUE.brighter();
-        Color color2 = Color.WHITE;
-        graphics2d.setPaint(new GradientPaint(0, 0, color1, h, h, color2));
-        graphics2d.fillRect(0, 0, w, h); */
         g.drawImage(testImageIcon(),0,0,getSize().width,getSize().height,this);
         drawMainGeneric(g2);
         
@@ -71,11 +59,17 @@ public class WeatherView extends JPanel {
     public BufferedImage testImageIcon(){
 
 
+      // from: https://wallpapercave.com/wp/FKVHB5I.jpg
       BufferedImage day = Inf101Graphics.loadImageFromResources("/day_image.jpg");
+      // from: https://getwallpapers.com/wallpaper/full/8/0/1/168662.jpg
       BufferedImage night = Inf101Graphics.loadImageFromResources("/night_image.jpg");
+
       BufferedImage cloudy = Inf101Graphics.loadImageFromResources("/fog.png");
+
       BufferedImage rain = Inf101Graphics.loadImageFromResources("/fog.png");
+
       BufferedImage fog = Inf101Graphics.loadImageFromResources("/fog.png");
+
       BufferedImage elseWeather = Inf101Graphics.loadImageFromResources("/fog.png");
 
 

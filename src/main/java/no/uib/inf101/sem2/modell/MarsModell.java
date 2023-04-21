@@ -16,8 +16,6 @@ public class MarsModell implements IMarsModell {
 
     @Override
     public String getTimeDetailsGenerallStringForMars(String detailString) {
-           // gets the most generic information, about wind, temperature, wind-direction
-        // etc. (check test.json for example.)
 
         // in case if we need to set something no nothing:
         if (detailString == "-") {
@@ -26,7 +24,6 @@ public class MarsModell implements IMarsModell {
         try {
             JSONObject jsonObj = new JSONObject(jsonStr);
             String newString = jsonObj.getString(detailString);
-
 
             return (newString + "");
 
@@ -43,8 +40,6 @@ public class MarsModell implements IMarsModell {
 
     @Override
     public ArrayList<String> genericDetailsInfoListForMars() {
-         // want to return with a arraylist with the most generic information we need
-        // from details:
 
         ArrayList<String> genericInfo = new ArrayList<>();
 
@@ -58,19 +53,19 @@ public class MarsModell implements IMarsModell {
         return genericInfo;
 
     }
-    public ArrayList<String> genericTitleDetailsInfoListForMars(){
+
+    @Override
+    public ArrayList<String> genericTitleDetailsInfoListForMars() {
         ArrayList<String> genericTitles = new ArrayList<>();
 
         genericTitles.add("Last update");
         genericTitles.add("Current Weather");
-        genericTitles.add("Pressure");        
+        genericTitles.add("Pressure");
         genericTitles.add("UV");
         genericTitles.add("Min. temp");
         genericTitles.add("Max. temp");
 
-
         return genericTitles;
     }
 
-    
 }

@@ -48,7 +48,6 @@ public class DefaultColorTheme implements ColorTheme {
 
     @Override
     public ArrayList<Color> getRowsDefaultColors() {
-        // the different colors for our rows in the grid! (change method name after that too!)
         ArrayList<Color> newColor = new ArrayList<>();
 
         // time color
