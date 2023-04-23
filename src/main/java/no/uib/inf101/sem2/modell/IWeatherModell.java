@@ -1,6 +1,8 @@
 package no.uib.inf101.sem2.modell;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface IWeatherModell {
@@ -47,7 +49,7 @@ public interface IWeatherModell {
      * @return a array with string representing different titles for values, like
      *         "Time" etc.
      */
-    public ArrayList<String> genericTitleDetailsInfoList();
+    ArrayList<String> genericTitleDetailsInfoList();
 
     /**
      * Gets all the information about possible, for the specified timeLimit
@@ -75,7 +77,7 @@ public interface IWeatherModell {
      * @param time     the specific hours
      * @return a string associatied with the times weather
      */
-    public String iconString(int timeNext, int time);
+    String getCurrentWeatherString(int timeNext, int time);
 
     /**
      * Gets the details of any value, like temperature
@@ -86,7 +88,7 @@ public interface IWeatherModell {
      *                     air_temperature
      * @return the value of the detailString, at the current time
      */
-    public String getTimeDetailsGenerallString(int time, String detailString);
+    String getTimeDetailsGenerallString(int time, String detailString);
 
     /**
      * Converts the time to the date
@@ -94,7 +96,7 @@ public interface IWeatherModell {
      * @param time a string representing the date in this format: YY-MM-DDTHH:MM:SSZ
      * @return the date
      */
-    public String convertTimeToDate(String time);
+    String convertTimeToDate(String time);
 
     /**
      * Gets the avarage value of an array
@@ -102,7 +104,7 @@ public interface IWeatherModell {
      * @param arrayList an array of string values, that can be double values
      * @return a double values representing the average value of the array
      */
-    public double getAverageOfArray(List<String> arrayList);
+    double getAverageOfArray(List<String> arrayList);
 
     /**
      * Gets only values of a array
@@ -111,7 +113,7 @@ public interface IWeatherModell {
      *                  duplicates
      * @return a arraylist consisting of integers, that are only of unique values
      */
-    public ArrayList<Integer> getUniqueValuesOnlyOfArray(ArrayList<Integer> arrayList);
+    ArrayList<Integer> getUniqueValuesOnlyOfArray(ArrayList<Integer> arrayList);
 
     /**
      * Gets the details of any value in multiple hours
@@ -121,7 +123,7 @@ public interface IWeatherModell {
      * @return a 2D-arraylist, that shows all the values of one day in the first
      *         place, etc.
      */
-    public List<List<String>> getListOfMultipleTimeDetails(int timelimit, String detailString);
+    List<List<String>> getListOfMultipleTimeDetails(int timelimit, String detailString);
 
     /**
      * Gets the unique values of an array and makes this into a new arraylist
@@ -130,7 +132,7 @@ public interface IWeatherModell {
      * @return Returns a list of only unique values found in a array of string
      *         elements
      */
-    public List<String> getUniqueValuesOnlyOfArrayString(List<String> arrayList);
+    List<String> getUniqueValuesOnlyOfArrayString(List<String> arrayList);
 
     /**
      * Gets the date for the specified timeLimit
@@ -140,4 +142,13 @@ public interface IWeatherModell {
      * @return a arraylist consisting of strings, which show the dates
      */
     ArrayList<String> getNextHoursDates(int timeLimit);
+
+    /**
+     * Gets the corresponding image to a string, used for initilizing a hashmap
+     * which includes images once and then picking which image you want
+     * 
+     * @return a hashmap, with strings corresponding to images, i.e. sunny - sunny
+     *         image
+     */
+    HashMap<String, BufferedImage> testImageIcon();
 }

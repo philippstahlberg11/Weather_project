@@ -31,7 +31,6 @@ public class MarsModell implements IMarsModell {
             try {
                 throw new JSONException(e);
             } catch (JSONException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         }

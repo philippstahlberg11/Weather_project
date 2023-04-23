@@ -6,7 +6,7 @@ import java.util.HashMap;
 import no.uib.inf101.sem2.grid.GridCell;
 import no.uib.inf101.sem2.grid.GridDimension;
 
-public interface ViewableTetrisModel {
+public interface ViewableTableModel {
 
   /**
    * Gets the rows and coloums
@@ -28,7 +28,7 @@ public interface ViewableTetrisModel {
    * @return an image, representing the correct value (i.e. sunny - sunny_picture
    *         etc.)
    */
-  public HashMap<String, BufferedImage> IconToPicture();
+  HashMap<String, BufferedImage> IconToPicture();
 
   /**
    * Check if we have an image-icon
@@ -38,6 +38,6 @@ public interface ViewableTetrisModel {
    * @return true if we are working with a description of weather -string, false
    *         if not
    */
-  public Boolean checkIfIcon(String value);
+  Boolean checkIfIcon(String value);
 
 }

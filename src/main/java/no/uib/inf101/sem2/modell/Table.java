@@ -2,7 +2,7 @@ package no.uib.inf101.sem2.modell;
 
 import no.uib.inf101.sem2.grid.Grid;
 
-public class TetrisBoard extends Grid<String> {
+public class Table extends Grid<String> {
 
     /**
      * A Tetrisboard with given rows and coloumns
@@ -11,7 +11,7 @@ public class TetrisBoard extends Grid<String> {
      * @param rows
      * @param columns
      */
-    public TetrisBoard(int rows, int columns) {
+    public Table(int rows, int columns) {
         super(rows, columns, "");
 
     }

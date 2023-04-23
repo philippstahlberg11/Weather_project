@@ -2,8 +2,7 @@ package no.uib.inf101.sem2.controller;
 
 import no.uib.inf101.sem2.modell.iShowGrid;
 import no.uib.inf101.sem2.modell.showDayGrid;
-import no.uib.inf101.sem2.modell.showTimeGrid;
-import no.uib.inf101.sem2.view.TetrisView;
+import no.uib.inf101.sem2.view.TableView;
 
 import java.awt.Dimension;
 import java.awt.event.*;
@@ -11,58 +10,52 @@ import javax.swing.*;
 
 public class WeatherController implements java.awt.event.KeyListener, ActionListener {
 
-    public TetrisView view;
+    private TableView view;
 
     JButton nextButton = new JButton("Next Page");
     JButton previousButton = new JButton("Previous Page");
 
     private iShowGrid showgrid;
 
-    public WeatherController(iShowGrid showGrid, TetrisView view) {
-        this.showgrid =  showGrid;
+    public WeatherController(iShowGrid showGrid, TableView view) {
+        this.showgrid = showGrid;
         this.view = view;
 
         view.setFocusable(true);
         view.addKeyListener(this);
-        if(showGrid instanceof showDayGrid){
-            // we dont want to be able to scroll trought so many days forwards since the data is extremly uncertain after just a few days forwards...
+        if (showGrid instanceof showDayGrid) {
+            // we dont want to be able to scroll trought so many days forwards since the
+            // data is extremly uncertain after just a few days forwards...
             nextButton.setVisible(false);
             previousButton.setVisible(false);
-            this.showgrid.showGridFirst(24+12);
+            // set a value of 24 hours, + 12 hours, that way we guarantee that we can at least show 
+            // mostly correct information about today and tomorrow, more that this can crash my pc...
+            this.showgrid.showGridFirst(24 + 12);
+        } else {
+            this.showgrid.showGridFirst(2);
+            // method for initialising button for next! (and previous with same logic)
+            // https://stackoverflow.com/questions/3195666/how-to-place-a-jbutton-at-a-desired-location-in-a-jframe-using-java
+            // How to make a button and initiliazing it:
+            // https://stackoverflow.com/questions/284899/how-do-you-add-an-actionlistener-onto-a-jbutton-in-java
+
+            this.view.setLayout(null);
+            this.nextButton.setLayout(null);
+            this.previousButton.setLayout(null);
+
+            nextButton.setVisible(true);
+            previousButton.setVisible(true);
+            previousButton.setSize(new Dimension(100, 50));
+            nextButton.setSize(new Dimension(100, 50));
+
+            this.view.add(previousButton);
+            this.view.add(nextButton);
+            previousButton.setLocation(50, 625);
+            nextButton.setLocation(1200, 625);
+
+            // get the height/width of the grid
+            nextButton.addActionListener(e -> nextButtonPressed());
+            previousButton.addActionListener(e -> previousButtonPressed());
         }
-        else{
-        this.showgrid.showGridFirst(2);
-
-        
-           // method for initialising button for next! (and previous with same logic)
-
-        // https://stackoverflow.com/questions/3195666/how-to-place-a-jbutton-at-a-desired-location-in-a-jframe-using-java
-        // for hvordan en lager en knapp (JButton) og plasserer den
-        // https://stackoverflow.com/questions/284899/how-do-you-add-an-actionlistener-onto-a-jbutton-in-java
-
-
-        this.view.setLayout(null);
-        this.nextButton.setLayout(null);
-        this.previousButton.setLayout(null);
-
-        nextButton.setVisible(true);
-        previousButton.setVisible(true);
-        previousButton.setSize(new Dimension(100, 50));
-        nextButton.setSize(new Dimension(100, 50));
-
-        this.view.add(previousButton);
-        this.view.add(nextButton);
-        // må justeres!
-        previousButton.setLocation(50, 625);
-        nextButton.setLocation(1200, 625);
-     
-        // get the height/width of the grid
-        nextButton.addActionListener(e -> nextButtonPressed());
-        previousButton.addActionListener(e -> previousButtonPressed());
-        }
-     
-
-      
 
     }
 
@@ -72,7 +65,6 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
         try {
             this.showgrid.showNextPage();
             this.view.repaint();
-
 
         } catch (Exception e) {
             this.nextButton.setVisible(false);

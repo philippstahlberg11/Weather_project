@@ -9,11 +9,11 @@ import java.net.URL;
 //  Copied from the video : https://www.youtube.com/watch?v=yLf2-r8w9lQ&t=186s
 // to get the information from any json file/json url to a string!
 
-public class JsonObject {
+public class JsonString {
 
     private String strName;
 
-    public JsonObject(String name) {
+    public JsonString(String name) {
         this.strName = name;
 
     }

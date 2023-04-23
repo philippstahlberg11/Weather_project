@@ -3,7 +3,6 @@ package no.uib.inf101.sem2.view;
 import javax.swing.JPanel;
 
 import no.uib.inf101.sem2.grid.GridCell;
-import no.uib.inf101.sem2.modell.WeatherModell;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,31 +11,30 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
-public class TetrisView extends JPanel {
+public class TableView extends JPanel {
 
-  private ViewableTetrisModel viewableTetrisModel;
+  private ViewableTableModel viewableTableModel;
 
   private ColorTheme colorTheme;
 
-  private static final double OUTERMARGIN = 15;
-  private static final double INNERMARGIN = 5;
+  private final double OUTERMARGIN = 15;
+  private final double INNERMARGIN = 5;
 
   private HashMap<String, BufferedImage> imageMaps;
 
-  public WeatherModell modellWeather;
 
-  public TetrisView(ViewableTetrisModel viewableTetrisModel, WeatherModell modell) {
-    this.viewableTetrisModel = viewableTetrisModel;
+  public TableView(ViewableTableModel viewableTableModel) {
+    this.viewableTableModel = viewableTableModel;
     this.colorTheme = new DefaultColorTheme();
-    this.modellWeather = modell;
 
     this.setPreferredSize(new Dimension(100, 680));
     this.setFocusable(true);
     this.setBackground(colorTheme.getBackgroundColor());
 
     // images/icons, being initilized with values!
-    this.imageMaps = viewableTetrisModel.IconToPicture();
+    this.imageMaps = viewableTableModel.IconToPicture();
 
   }
 
@@ -44,7 +42,7 @@ public class TetrisView extends JPanel {
   // either the window opens or resizes, or we call .repaint() on this object.
   // Note: NEVER call paintComponent directly yourself
   @Override
-  public void paintComponent(Graphics g) {
+  protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2 = (Graphics2D) g;
 
@@ -59,7 +57,7 @@ public class TetrisView extends JPanel {
    * 
    * @param graphics2d paintComponent for our drawing
    */
-  public void drawGame(Graphics2D graphics2d) {
+  private void drawGame(Graphics2D graphics2d) {
 
     double x = OUTERMARGIN;
     double y = OUTERMARGIN;
@@ -72,16 +70,16 @@ public class TetrisView extends JPanel {
     graphics2d.fill(box);
 
     CellPositionToPixelConverter cellposition = new CellPositionToPixelConverter(box,
-        this.viewableTetrisModel.getDimension(), INNERMARGIN);
+        this.viewableTableModel.getDimension(), INNERMARGIN);
 
-    drawCells(graphics2d, this.viewableTetrisModel.getTilesOnBoard(), cellposition, this.colorTheme,
-        viewableTetrisModel, imageMaps);
+    drawCells(graphics2d, this.viewableTableModel.getTilesOnBoard(), cellposition, this.colorTheme,
+        viewableTableModel, imageMaps);
 
   }
 
   /**
    * Drawing each the cells with a loop, by finding where to draw them,
-   * and then setting the color for each corresponding cell
+   * and then drawing them as string text or icons
    * 
    * @param graphics2d                   paintComponent for our drawing
    * @param iterableGridCell             the tiles on the board
@@ -90,7 +88,7 @@ public class TetrisView extends JPanel {
    * @param colorTheme                   helps us find the color each of cells
    *                                     have, then setting the color for our
    *                                     cells to them
-   * @param viewabletetrisModel          to later be able to distinguish
+   * @param viewableTableModel           to later be able to distinguish
    *                                     betweenworking with a icon or just
    *                                     regular text
    * 
@@ -100,8 +98,8 @@ public class TetrisView extends JPanel {
    *                                     initialized in the constructur above
    * 
    */
-  public static void drawCells(Graphics2D graphics2d, Iterable<GridCell<String>> iterableGridCell,
-      CellPositionToPixelConverter cellPositionToPixelConverter, ColorTheme colorTheme, ViewableTetrisModel view,
+  private static void drawCells(Graphics2D graphics2d, Iterable<GridCell<String>> iterableGridCell,
+      CellPositionToPixelConverter cellPositionToPixelConverter, ColorTheme colorTheme, ViewableTableModel view,
       HashMap<String, BufferedImage> imageS) {
 
     // Going trougn each of the elements in the iterableGridCell
@@ -120,6 +118,7 @@ public class TetrisView extends JPanel {
       } else {
         Color colorDifferent = colorTheme.getRowsDefaultColors().get(i.pos().col());
         graphics2d.setColor(colorDifferent);
+        graphics2d.setFont(new Font("Arial", Font.BOLD, 20));
         Inf101Graphics.drawCenteredString(graphics2d, i.value(), rektangel);
       }
     }

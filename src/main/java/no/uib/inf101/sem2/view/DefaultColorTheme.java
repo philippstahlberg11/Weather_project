@@ -5,31 +5,7 @@ import java.util.ArrayList;
 
 public class DefaultColorTheme implements ColorTheme {
 
-    @Override
-    public Color getCellColor(Character c) {
-
-    // sees if the characer given matches any of these cases if not; then we could create one.
-    Color color = switch(c) {
-        case 'r' -> Color.RED;
-        case 'g' -> Color.GREEN;
-        case 'b' -> Color.BLUE;
-        case 'y' -> Color.YELLOW;
-        // ENDRE PÅ DISSE VERDIENE SENERE
-        case 'L' -> Color.BLUE;
-        case 'I' -> Color.YELLOW;
-        case 'Z' -> Color.RED;
-        case 'T' -> Color.PINK;
-        case 'S' -> Color.CYAN;
-        case 'O' -> Color.ORANGE;
-        case 'J' -> Color.MAGENTA;
-        // default value if no color value given:
-        case '-' -> Color.GRAY;
-        default -> throw new IllegalArgumentException(
-            "No available color for '" + c + "'");
-        };
-    return color;
-    }
-
+   
     @Override
     public Color getFrameColor() {
         return (Color.LIGHT_GRAY);
@@ -38,12 +14,6 @@ public class DefaultColorTheme implements ColorTheme {
     @Override
     public Color getBackgroundColor() {
         return Color.WHITE;
-    }
-
-    @Override
-    public Color getTranspoarentColor() {
-
-        return new Color(0,0,0,128);
     }
 
     @Override
@@ -66,6 +36,12 @@ public class DefaultColorTheme implements ColorTheme {
         newColor.add(Color.BLACK);
         // wind direction color
         newColor.add(Color.BLACK);
+        // in case if one wants to have more rows,
+        // caution: we recommend to not have much more than 12 rows,
+        // certain information might be very uncertain when going forwards 
+        for(int i = 0; i < 10; i++){
+            newColor.add(Color.BLACK);
+        }
 
         return newColor;
 

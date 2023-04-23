@@ -6,13 +6,6 @@ import java.util.ArrayList;
 public interface ColorTheme {
     
     /**
-     * Gets the color from a given color Character
-     * @param c character that represents a color
-     * @return Color
-     */
-    Color getCellColor(Character c);
-
-    /**
      * Gets the frame color, this is some default value
      */
     Color getFrameColor();
@@ -21,17 +14,9 @@ public interface ColorTheme {
      * Gets the background color, this is some default value
      */
     Color getBackgroundColor();
-
-    /**
-     * Mostly used for our "Game-over" situation.
-     * @return Transparent color
-     */
-    Color getTranspoarentColor();
-
-
     /**
      * Gets the different rows-colors, this is some default value
-     * @return
+     * @return an arraylist consisting of colors
      */
     ArrayList<Color> getRowsDefaultColors();
     

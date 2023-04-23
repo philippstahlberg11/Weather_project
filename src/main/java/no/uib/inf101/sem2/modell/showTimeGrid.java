@@ -2,20 +2,20 @@ package no.uib.inf101.sem2.modell;
 
 import no.uib.inf101.sem2.grid.CellPosition;
 
-public class showTimeGrid extends TetrisModel implements iShowGrid {
+public class showTimeGrid extends TableModel implements iShowGrid {
 
-    public TetrisBoard tetrisBoard;
+    public Table tetrisBoard;
     public WeatherModell modellWeather;
     public int value;
 
-    public showTimeGrid(TetrisBoard tetrisBoard, WeatherModell modellWeather) {
+    public showTimeGrid(Table tetrisBoard, WeatherModell modellWeather) {
         super(tetrisBoard, modellWeather);
         this.tetrisBoard = tetrisBoard;
         this.modellWeather = modellWeather;
         this.value = 0;
 
     }
-
+    @Override
     public void showGridFirst(int initialValue) {
 
         this.value += initialValue;
@@ -26,11 +26,11 @@ public class showTimeGrid extends TetrisModel implements iShowGrid {
                             .getNextHoursDetails(tetrisBoard.rows() + (this.value)).get(row - 1 + (this.value))));
 
             if (row >= 6) {
-                tetrisBoard.set(new CellPosition(row, 1), modellWeather.iconString(1, 0 + (this.value)));
+                tetrisBoard.set(new CellPosition(row, 1), modellWeather.getCurrentWeatherString(1, 0 + (this.value)));
             } else if (row >= 12) {
-                tetrisBoard.set(new CellPosition(row, 1), modellWeather.iconString(2, 0 + (this.value)));
+                tetrisBoard.set(new CellPosition(row, 1), modellWeather.getCurrentWeatherString(2, 0 + (this.value)));
             } else {
-                tetrisBoard.set(new CellPosition(row, 1), modellWeather.iconString(0, 0 + (this.value)));
+                tetrisBoard.set(new CellPosition(row, 1), modellWeather.getCurrentWeatherString(0, 0 + (this.value)));
             }
 
             tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 2),

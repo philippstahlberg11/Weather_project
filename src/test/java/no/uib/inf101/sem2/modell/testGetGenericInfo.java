@@ -17,7 +17,7 @@ public class testGetGenericInfo {
         System.setProperty("http.agent", "Chrome");
         String url = "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=60.391262&lon=5.322054";
 
-        JsonObject stringJson = new JsonObject(url);
+        JsonString stringJson = new JsonString(url);
         // gives the option to either have a jsonobject from a url/file:
         String stringJsonURL = stringJson.getJSONFromURL();
 

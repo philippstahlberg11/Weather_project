@@ -1,6 +1,8 @@
 package no.uib.inf101.sem2.modell;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 //import org.json.simple.parser.JSONParser;
+
+import no.uib.inf101.sem2.view.Inf101Graphics;
 
 public class WeatherModell implements IWeatherModell {
 
@@ -208,7 +212,7 @@ public class WeatherModell implements IWeatherModell {
     }
 
     @Override
-    public String iconString(int timeNext, int time) {
+    public String getCurrentWeatherString(int timeNext, int time) {
         // choose between next_1_hours, next_6_hours, og next_12_hours... (beware:
         // next_12_hours often has a less stronger certanty)
         ArrayList<Integer> i = new ArrayList<>();
@@ -261,6 +265,35 @@ public class WeatherModell implements IWeatherModell {
     public List<String> getUniqueValuesOnlyOfArrayString(List<String> arrayList) {
         List<String> newList = new ArrayList<String>(new HashSet<String>(arrayList));
         return newList;
+    }
+
+    @Override
+    public HashMap<String, BufferedImage> testImageIcon() {
+        // add more pictures here if wanted!:::
+
+        // from: https://wallpapercave.com/wp/FKVHB5I.jpg
+        BufferedImage day = Inf101Graphics.loadImageFromResources("/day_image.jpg");
+        // from: https://getwallpapers.com/wallpaper/full/8/0/1/168662.jpg
+        BufferedImage night = Inf101Graphics.loadImageFromResources("/night_image.jpg");
+        // from:
+        // https://www.gannett-cdn.com/-mm-/033e3009f1c9a067cfc2b98082cf9bade8f7ddc5/c=0-201-2054-1362/local/-/media/MIGroup/PortHuron/2014/08/27/1409139184000-Cloudy.jpg?width=3200&height=1680&fit=crop
+        BufferedImage cloudy = Inf101Graphics.loadImageFromResources("/cloudy_image.jpg");
+        // from:
+        // https://th.bing.com/th/id/R.a07bc9056b64a61f7d79eea1e882eaa3?rik=4nkVD8ZKNMpkJg&pid=ImgRaw&r=0
+        BufferedImage rain = Inf101Graphics.loadImageFromResources("/rain_image.jpg");
+        // from:
+        // https://www.treehugger.com/thmb/XOXmyKnkWf-eo3RLULeWaT0xDaQ=/1024x768/filters:fill(auto,1)/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2016__02__fog-bitterroot-mountains-4807feab43334256aded341517fae38f.jpg
+        BufferedImage fog = Inf101Graphics.loadImageFromResources("/fog_image.jpg");
+
+        HashMap<String, BufferedImage> imageMap = new HashMap<>();
+        imageMap.put("day", day);
+        imageMap.put("night", night);
+        imageMap.put("cloudy", cloudy);
+        imageMap.put("rain", rain);
+        imageMap.put("fog", fog);
+
+        return imageMap;
+
     }
 
 }

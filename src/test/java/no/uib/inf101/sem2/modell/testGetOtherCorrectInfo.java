@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 public class testGetOtherCorrectInfo {
 
     private static WeatherModell modell;
-    private static TetrisModel model;
+    private static TableModel model;
 
     private static MarsModell modellMars;
 
@@ -21,19 +21,19 @@ public class testGetOtherCorrectInfo {
         System.setProperty("http.agent", "Chrome");
         String url = "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=60.391262&lon=5.322054";
 
-        JsonObject stringJson = new JsonObject(url);
+        JsonString stringJson = new JsonString(url);
         // gives the option to either have a jsonobject from a url/file:
         String stringJsonURL = stringJson.getJSONFromURL();
 
         modell = new WeatherModell(stringJsonURL);
 
-        TetrisBoard board = new TetrisBoard(7, modell.genericDetailsInfoList().size() + 2);
+        Table board = new Table(7, modell.genericDetailsInfoList().size() + 2);
 
-        model = new TetrisModel(board, modell);
+        model = new TableModel(board, modell);
 
         String MarsUrl = "https://api.maas2.apollorion.com/";
 
-        JsonObject MarsJson = new JsonObject(MarsUrl);
+        JsonString MarsJson = new JsonString(MarsUrl);
         String stringMarsURL = MarsJson.getJSONFromURL();
 
         modellMars = new MarsModell(stringMarsURL);
@@ -57,9 +57,9 @@ public class testGetOtherCorrectInfo {
     @Test
     public void testGetRealIcons() {
 
-        String FirstHourIconString = modell.iconString(0, 0);
-        String SixHourIconString = modell.iconString(1, 0);
-        String TwelveHourIconString = modell.iconString(2, 0);
+        String FirstHourIconString = modell.getCurrentWeatherString(0, 0);
+        String SixHourIconString = modell.getCurrentWeatherString(1, 0);
+        String TwelveHourIconString = modell.getCurrentWeatherString(2, 0);
 
         assertTrue(model.checkIfIcon(FirstHourIconString));
         assertTrue(model.checkIfIcon(SixHourIconString));
