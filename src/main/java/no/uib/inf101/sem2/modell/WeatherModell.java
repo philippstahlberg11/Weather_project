@@ -42,14 +42,8 @@ public class WeatherModell implements IWeatherModell {
             return (data_details_instant_temp.get(detailString) + "");
 
         } catch (JSONException e) {
-            try {
-                throw new JSONException(e);
-            } catch (JSONException e1) {
-                e1.printStackTrace();
-            }
+           return "NOT FOUND";
         }
-        return detailString;
-
     }
 
     @Override

@@ -29,7 +29,7 @@ public class TableModel implements ViewableTableModel {
     @Override
     public HashMap<String, BufferedImage> IconToPicture() {
         // add more pictures here if needed! :::
-        BufferedImage sunny_test = Inf101Graphics.loadImageFromResources("/sunny_sun.png");
+        BufferedImage nonExistantPicuture = Inf101Graphics.loadImageFromResources("/blank.png");
         BufferedImage partlyClodyNight = Inf101Graphics.loadImageFromResources("/PartlyCloudy.Night.png");
         BufferedImage partlyCloudyDay = Inf101Graphics.loadImageFromResources("/PartlyCloudy_day.png");
         BufferedImage Cloudy = Inf101Graphics.loadImageFromResources("/Cloudy.png");
@@ -55,7 +55,8 @@ public class TableModel implements ViewableTableModel {
         imageMap.put("clearsky_night", clear_sky_night);
         imageMap.put("fair_day", fair_day);
         imageMap.put("clearsky_day", clearsky_day);
-        imageMap.put("-", sunny_test);
+        // in case if it does not find an image, we return with the following image:
+        imageMap.put("-", nonExistantPicuture);
 
         return imageMap;
 

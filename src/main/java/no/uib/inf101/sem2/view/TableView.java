@@ -24,7 +24,6 @@ public class TableView extends JPanel {
 
   private HashMap<String, BufferedImage> imageMaps;
 
-
   public TableView(ViewableTableModel viewableTableModel) {
     this.viewableTableModel = viewableTableModel;
     this.colorTheme = new DefaultColorTheme();
@@ -114,12 +113,21 @@ public class TableView extends JPanel {
       if (view.checkIfIcon(i.value())) {
         double xValue = rektangel.getCenterX();
         double yValue = rektangel.getCenterY();
-        Inf101Graphics.drawCenteredImage(graphics2d, imageS.get(i.value()), xValue, yValue, 0.35);
+        try {
+          Inf101Graphics.drawCenteredImage(graphics2d, imageS.get(i.value()), xValue, yValue, 0.35);
+        } catch (Exception e) {
+          Inf101Graphics.drawCenteredImage(graphics2d, imageS.get("-"), xValue, yValue, 0.35);
+
+        }
       } else {
         Color colorDifferent = colorTheme.getRowsDefaultColors().get(i.pos().col());
         graphics2d.setColor(colorDifferent);
         graphics2d.setFont(new Font("Arial", Font.BOLD, 20));
-        Inf101Graphics.drawCenteredString(graphics2d, i.value(), rektangel);
+        try {
+          Inf101Graphics.drawCenteredString(graphics2d, i.value(), rektangel);
+        } catch (Exception e) {
+          Inf101Graphics.drawCenteredString(graphics2d, "NOT FOUND", rektangel);
+        }
       }
     }
   }
