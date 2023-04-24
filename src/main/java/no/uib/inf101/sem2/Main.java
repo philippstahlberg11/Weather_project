@@ -49,26 +49,26 @@ public class Main {
     JsonString stringJson = new JsonString(url);
     // gives the option to either have a jsonobject from a url/file:
     String stringJsonURL = stringJson.getJSONFromURL();
-    WeatherModell modell = new WeatherModell(stringJsonURL);
-    WeatherView view = new WeatherView(modell, modellMars);
+    WeatherModell mainModell = new WeatherModell(stringJsonURL);
+    WeatherView mainView = new WeatherView(mainModell, modellMars);
     // ----------
 
     // HOUR FOR HOUR-----
-    Table board = new Table(7, modell.genericDetailsInfoList().size() + 2);
-    TableModel model = new TableModel(board, modell);
-    showTimeGrid i = new showTimeGrid(board, modell);
-    TableView view2 = new TableView(model);
-    new WeatherController(i, view2);
+    Table hourBoard = new Table(7, mainModell.genericDetailsInfoList().size() + 2);
+    TableModel hourModel = new TableModel(hourBoard, mainModell);
+    showTimeGrid hourGrid = new showTimeGrid(hourBoard, mainModell);
+    TableView hourToHourTable = new TableView(hourModel);
+    new WeatherController(hourGrid, hourToHourTable);
     // ------------
 
     // DAY FOR DAY_---- WE dont want to show to many days forwards (even YR.no
     // dosent do that), since we dont have enough certain data to sustain our
     // preferably certain data ....
-    Table board2 = new Table(3, modell.genericDetailsInfoList().size() + 2);
-    TableModel model2 = new TableModel(board2, modell);
-    showDayGrid i2 = new showDayGrid(board2, modell);
-    TableView view3 = new TableView(model2);
-    new WeatherController(i2, view3);
+    Table dayBoard = new Table(3, mainModell.genericDetailsInfoList().size() + 2);
+    TableModel dayModel = new TableModel(dayBoard, mainModell);
+    showDayGrid dayGrid = new showDayGrid(dayBoard, mainModell);
+    TableView dayToDayTable = new TableView(dayModel);
+    new WeatherController(dayGrid, dayToDayTable);
     // -------------
 
     JFrame frame = new JFrame();
@@ -90,10 +90,10 @@ public class Main {
     mainPane.setLayout(new BorderLayout());
 
     scrPane.setViewportView(containerPane);
-
-    mainPane.add(view, BorderLayout.BEFORE_FIRST_LINE);
-    mainPane.add(view3, BorderLayout.CENTER);
-    mainPane.add(view2, BorderLayout.AFTER_LAST_LINE);
+    
+    mainPane.add(mainView, BorderLayout.BEFORE_FIRST_LINE);
+    mainPane.add(dayToDayTable, BorderLayout.CENTER);
+    mainPane.add(hourToHourTable, BorderLayout.AFTER_LAST_LINE);
     containerPane.add(mainPane);
 
     scrPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

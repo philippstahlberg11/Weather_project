@@ -54,6 +54,7 @@ public class showDayGrid extends TableModel implements iShowGrid {
     @Override
     public void showNextPage() {
         // nothing
+        
     }
 
     @Override
