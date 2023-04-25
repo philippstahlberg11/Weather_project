@@ -15,6 +15,7 @@ public class showDayGrid extends TableModel implements iShowGrid {
         this.modellWeather = modellWeather;
 
     }
+
     @Override
     public void showGridFirst(int initialValue) {
 
@@ -23,14 +24,10 @@ public class showDayGrid extends TableModel implements iShowGrid {
                     modellWeather.getNextHoursDates(tetrisBoard.rows() + (initialValue)))).get(row - 1));
             tetrisBoard.set(new CellPosition(row, 0), someList.get(row - 1));
 
-            // Sets the current icon for the date today, but also (around midday) icon for
-            // the next day
-            tetrisBoard.set(new CellPosition(row, 1), modellWeather.getCurrentWeatherString(1, 0 + (row * initialValue)));
+            getWeatherString(row, row, initialValue);
 
-            tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 2),
-                    modellWeather.genericTitleDetailsInfoList().get(tetrisBoard.cols() - 2));
-            tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 1),
-                    modellWeather.genericTitleDetailsInfoList().get(tetrisBoard.cols() - 1));
+            setSpecificValues();
+
             for (int col = 2; col < tetrisBoard.cols(); col++) {
                 tetrisBoard.set(new CellPosition(0, col - 2), modellWeather.genericTitleDetailsInfoList().get(col - 2));
                 // instead of time : (date)
@@ -51,10 +48,23 @@ public class showDayGrid extends TableModel implements iShowGrid {
 
     }
 
+    private void getWeatherString(int row, int col, int initialValue) {
+        // Sets the current icon for the date today, but also (around midday) icon for
+        // the next day
+        tetrisBoard.set(new CellPosition(row, 1), modellWeather.getCurrentWeatherString(1, 0 + (row * initialValue)));
+    }
+
+    private void setSpecificValues() {
+        tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 2),
+                modellWeather.genericTitleDetailsInfoList().get(tetrisBoard.cols() - 2));
+        tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 1),
+                modellWeather.genericTitleDetailsInfoList().get(tetrisBoard.cols() - 1));
+    }
+
     @Override
     public void showNextPage() {
         // nothing
-        
+
     }
 
     @Override

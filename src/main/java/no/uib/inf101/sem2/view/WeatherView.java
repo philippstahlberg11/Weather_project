@@ -109,14 +109,28 @@ public class WeatherView extends JPanel {
     return W.intValue();
   }
 
-  /**
-   * Shows the most generall information, current weather forecast, mars forecast,
-   * and background picture
-   * 
-   * @param graphics2d takes in a graphics2D parameter, to show the view in it
-   */
-  private void drawMainGeneric(Graphics2D graphics2d) {
+  private void drawMainMarsCenterString(Graphics2D graphics2d) {
+    for (int i = 0; i < marsModell.genericDetailsInfoListForMars().size(); i++) {
+      graphics2d.setFont(new Font("Arial", Font.BOLD, 20));
+      int valueX = this.getWidth() / 4 + (i * 180);
+      if (i == 0) {
+        valueX -= 200;
+      }
+      if (i == 1) {
+        valueX -= 100;
+      }
+      Rectangle2D rect6 = new Rectangle2D.Double(valueX - 300, this.getHeight() / 2, this.getWidth() / 2,
+          this.getHeight() / 2);
+      graphics2d.setColor(new Color(204, 0, 34));
+      graphics2d.setFont(new Font("Arial", Font.BOLD, 20));
+      Inf101Graphics.drawCenteredString(graphics2d,
+          marsModell.genericTitleDetailsInfoListForMars().get(i) + ": "
+              + marsModell.getTimeDetailsGenerallStringForMars(marsModell.genericDetailsInfoListForMars().get(i)),
+          rect6);
+    }
+  }
 
+  private void drawMainCenterString(Graphics2D graphics2d) {
     for (int i = 0; i < this.temperatureString.size(); i++) {
       graphics2d.setColor(Color.WHITE);
       graphics2d.setFont(new Font("Arial", Font.BOLD, 20));
@@ -126,6 +140,19 @@ public class WeatherView extends JPanel {
       }
       drawString(graphics2d, this.temperatureString.get(i) + " ", valueX, this.getHeight() / 3);
     }
+
+  }
+
+  /**
+   * Shows the most generall information, current weather forecast, mars forecast,
+   * and background picture
+   * 
+   * @param graphics2d takes in a graphics2D parameter, to show the view in it
+   */
+  private void drawMainGeneric(Graphics2D graphics2d) {
+
+    drawMainCenterString(graphics2d);
+
     graphics2d.setFont(new Font("Arial", Font.ITALIC, 25));
     drawString(graphics2d, "Current Weather ", (this.getWidth() / 4 + (-80)), this.getHeight() / 4);
 
@@ -136,26 +163,8 @@ public class WeatherView extends JPanel {
             + getFeelsLkeTemperature(temperatureString.get(0) + " ", temperatureString.get(3) + " ") + " celsius",
         this.getWidth() / 4 - 80, this.getHeight() / 3 + 30);
 
-    for (int i = 0; i < marsModell.genericDetailsInfoListForMars().size(); i++) {
-      graphics2d.setFont(new Font("Arial", Font.BOLD, 20));
-      int valueX = this.getWidth() / 4 + (i * 180);
-      if (i == 0) {
-        valueX -= 200;
-      }
-      if (i == 1) {
-        valueX -= 100;
-      }
+    drawMainMarsCenterString(graphics2d);
 
-      Rectangle2D rect6 = new Rectangle2D.Double(valueX - 300, this.getHeight() / 2, this.getWidth() / 2,
-          this.getHeight() / 2);
-      graphics2d.setColor(new Color(204, 0, 34));
-      graphics2d.setFont(new Font("Arial", Font.BOLD, 20));
-      Inf101Graphics.drawCenteredString(graphics2d,
-          marsModell.genericTitleDetailsInfoListForMars().get(i) + ": "
-              + marsModell.getTimeDetailsGenerallStringForMars(marsModell.genericDetailsInfoListForMars().get(i)),
-          rect6);
-
-    }
     graphics2d.setFont(new Font("Arial", Font.ITALIC, 15));
     drawString(graphics2d, "Weather forecast for the planet Mars:", this.getWidth() / 4 - 250,
         this.getHeight() / 2 + 50);

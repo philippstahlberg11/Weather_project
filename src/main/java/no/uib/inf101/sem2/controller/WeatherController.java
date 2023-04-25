@@ -16,10 +16,8 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
 
     private TableView view;
 
-    JButton showNextGrid = new JButton("NextGrid");
-
-    JButton nextButton = new JButton("Next Page");
-    JButton previousButton = new JButton("Previous Page");
+    private JButton nextButton = new JButton("Next Page");
+    private JButton previousButton = new JButton("Previous Page");
 
     private iShowGrid showgrid;
 
@@ -31,14 +29,6 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
 
         view.setFocusable(true);
         view.addKeyListener(this);
-
- /*        this.showNextGrid.setLayout(null);
-        showNextGrid.setVisible(true);
-        showNextGrid.setSize(new Dimension(100, 50));
-        this.view.add(showNextGrid);
-        showNextGrid.setLocation(50, 50);
-        showNextGrid.addActionListener(e -> showGridNextPressed()); */
-        
 
         if (showGrid instanceof showDayGrid) {
             // we dont want to be able to scroll trought so many days forwards since the
@@ -110,12 +100,6 @@ public class WeatherController implements java.awt.event.KeyListener, ActionList
         }
         this.view.repaint();
     }
-
-    /* private void showGridNextPressed() {
-        this.view.setVisible(false);
-        this.view.repaint();
-
-    } */
 
     @Override
     public void keyPressed(KeyEvent e) throws IndexOutOfBoundsException {

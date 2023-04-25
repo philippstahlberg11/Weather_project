@@ -4,9 +4,9 @@ import no.uib.inf101.sem2.grid.CellPosition;
 
 public class showTimeGrid extends TableModel implements iShowGrid {
 
-    public Table tetrisBoard;
-    public WeatherModell modellWeather;
-    public int value;
+    private Table tetrisBoard;
+    private WeatherModell modellWeather;
+    private int value;
 
     public showTimeGrid(Table tetrisBoard, WeatherModell modellWeather) {
         super(tetrisBoard, modellWeather);
@@ -15,6 +15,7 @@ public class showTimeGrid extends TableModel implements iShowGrid {
         this.value = 0;
 
     }
+
     @Override
     public void showGridFirst(int initialValue) {
 
@@ -25,18 +26,9 @@ public class showTimeGrid extends TableModel implements iShowGrid {
                     modellWeather.convertTimeToHours(modellWeather
                             .getNextHoursDetails(tetrisBoard.rows() + (this.value)).get(row - 1 + (this.value))));
 
-            if (row >= 6) {
-                tetrisBoard.set(new CellPosition(row, 1), modellWeather.getCurrentWeatherString(1, 0 + (this.value)));
-            } else if (row >= 12) {
-                tetrisBoard.set(new CellPosition(row, 1), modellWeather.getCurrentWeatherString(2, 0 + (this.value)));
-            } else {
-                tetrisBoard.set(new CellPosition(row, 1), modellWeather.getCurrentWeatherString(0, 0 + (this.value)));
-            }
+            getWeatherString(row, 1);
 
-            tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 2),
-                    modellWeather.genericTitleDetailsInfoList().get(tetrisBoard.cols() - 2));
-            tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 1),
-                    modellWeather.genericTitleDetailsInfoList().get(tetrisBoard.cols() - 1));
+            setSpecificValues();
 
             for (int col = 2; col < tetrisBoard.cols(); col++) {
                 tetrisBoard.set(new CellPosition(0, col - 2), modellWeather.genericTitleDetailsInfoList().get(col - 2));
@@ -47,6 +39,24 @@ public class showTimeGrid extends TableModel implements iShowGrid {
             }
         }
 
+    }
+
+    private void getWeatherString(int row, int col) {
+        if (row >= 6) {
+            tetrisBoard.set(new CellPosition(row, col), modellWeather.getCurrentWeatherString(1, 0 + (this.value)));
+        } else if (row >= 12) {
+            tetrisBoard.set(new CellPosition(row, col), modellWeather.getCurrentWeatherString(2, 0 + (this.value)));
+        } else {
+            tetrisBoard.set(new CellPosition(row, col), modellWeather.getCurrentWeatherString(0, 0 + (this.value)));
+        }
+
+    }
+
+    private void setSpecificValues() {
+        tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 2),
+                modellWeather.genericTitleDetailsInfoList().get(tetrisBoard.cols() - 2));
+        tetrisBoard.set(new CellPosition(0, tetrisBoard.cols() - 1),
+                modellWeather.genericTitleDetailsInfoList().get(tetrisBoard.cols() - 1));
     }
 
     @Override
